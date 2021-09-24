@@ -3,7 +3,8 @@
 ## Design Decisions
 Since the list of things we were given from the lab seemed like a list of things to do. We decided to call the title of the page a to-do list. By using the 80/20 rule, we decided that we just wanted to show the check list items and have the other options be hidden and only be accessed by clicking the "edit" and "+" button. The "+" button refers to adding a new item to the list. We also decided to place the hide completed at the bottom of the page since while something people use, it is not as important as being able to edit the to-do list or adding new item to the list.
 
-<!-- INSERT PHOTO HERE -->
+![design1](design-page1.png)
+![design2](design-page2.png)
 
 Some design decisions we made that may not be obvious looking at the static pages are that in order to edit the name of an item in the list, you must click the edit button. The button will say done if the to-do list is in edit mode. The users can click this button once they are finished editing the to-do list.
 
@@ -11,11 +12,7 @@ For deleting all completed items, we decided that this can only be done once the
 
 ## Final Design
 
-Our final designs are shown below. The design is in moto G4 size such as:
-
-<!-- INSERT MOTO g4 image here -->
-
-However, since the other screenshots were taken on a browser, the images are cropped in order to fit the screen. 0
+Our final designs are shown below. The design is in moto G4 size. However, since the other screenshots were taken on a browser, the images are cropped in order to fit the screen. 
 
 ### Tasks
 
@@ -52,8 +49,7 @@ However, since the other screenshots were taken on a browser, the images are cro
 - Rename the item "Text John" to "Text John about bank statements" (assumes there exists an item named "Text John").
 
 #### Initial
-
-<!-- Insert photo after fixing "delete completed" -->
+![Text-john-Final](text-john-end.png)
 
 #### Final
 ![Final](final-png.png)
@@ -67,8 +63,12 @@ However, since the other screenshots were taken on a browser, the images are cro
 ![hide-completed-end](hide-completed-end.png)
 
 - Delete all completed items.
-<!-- Insert photo after fixing "delete completed" -->
 
+### Inital
+![delete-completed-initial](delete-completed-initial.png)
+
+#### Final
+![delete-completed-end](delete-completed-fend.png)
 ### Challenges
 
 One of the biggest challenges we faced was thinking through the different use cases. Initially, we thought it would be a simple tasks such that each html page clearly showed how the UI worked. However, upon designing it, we assumed the role of the user instead of the developer and realized the number of steps we needed to take in order to do a task. Thus, our biggest hurdle was looking at the user-interface through the perspective of the user.
