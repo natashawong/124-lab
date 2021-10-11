@@ -39,14 +39,12 @@ function App() {
 
   function doneClicked() {
     let newData = data;
-    {data[data.length-1].todo === "" && newData.pop()}
-    setData(newData);
-    {adding == false ? setEditing(false) : setAdding(true)};
-  }
+    data[data.length-1].todo === "" && newData.pop()
 
-  // function editClicked(){
-  //   setEditing(true);
-  // }
+    setData(newData);
+    setEditing(false);
+    setAdding(false);
+  }
 
   return (
     <>
@@ -55,12 +53,12 @@ function App() {
               <h1 className="underline">To-do list</h1>
           </div>
           <div className="buttons">
-              {adding == true || editing == true ? 
+              {adding || editing ? 
                   (<button onClick={doneClicked}>Done</button>)
                   : 
                   (
                     <>
-                    <button onClick={setEditing(true)}>Edit</button>
+                    <button onClick={() => setEditing(true)}>Edit</button>
                     <button onClick={plusClicked}>+</button> 
                     </>
                   )
@@ -69,11 +67,12 @@ function App() {
       </div>
       <List
         data={data} 
-        filterType="showCompleted" 
-        setData={(index, isComplete) => {
+        filterType="showCompleted"
+        setData={(isComplete, index) => {
           let newData = data;
           newData[index].completed = isComplete;
           setData(newData);
+          console.log('new data change complete' + newData)
         }}
       />
     </>
