@@ -54,12 +54,12 @@ function App() {
           </div>
           <div className="buttons">
               {adding || editing ? 
-                  (<button onClick={doneClicked}>Done</button>)
+                  (<button class="button doneButton" onClick={doneClicked}>Done</button>)
                   : 
                   (
                     <>
-                    <button onClick={() => setEditing(true)}>Edit</button>
-                    <button onClick={plusClicked}>+</button> 
+                    <button class="button editButton" onClick={() => setEditing(true)}>Edit</button>
+                    <button class="button plusButton" onClick={plusClicked}>+</button> 
                     </>
                   )
               }

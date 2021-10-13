@@ -10,6 +10,8 @@ html {
 body {
     margin: 50px;
     height: 100%;
+    background-color: #f8edeb;
+    
 }
 
 .title {
@@ -30,27 +32,51 @@ body {
 }
 
 .buttons {
-    display: flex;
+    display: inline;
     flex-direction: row;
     margin-left: auto;
     justify-content: center;
     text-align: center;
-}
 
-.buttons h1:first-child {
-    margin-right: 20px;
-}
-
-.buttons h1:last-child {
-    padding: 15px;
-}
-
-.buttons h1 {
-    background-color: aliceblue;
-    border: solid 1px aliceblue;
     padding: 10px;
     border-radius: 10px;
+    
 }
+
+.plusButton {
+    background-color: #e5989b;
+    width:30px;
+    height:30px;
+    text-align:center;
+    line-height:1.1em;
+    font-size:1.1em;
+    border-radius: 5px;
+    margin-left: 10px;
+    margin-top: 26px;
+
+}
+
+.editButton {
+    background-color: #e5989b;
+    width:50px;
+    height:30px;
+    text-align:center;
+    line-height:1.1em;
+    font-size:1.1em;
+    border-radius: 5px;
+}
+
+.doneButton {
+    background-color: #e5989b;
+    width: 60px;
+    height:30px;
+    text-align:center;
+    line-height:1.1em;
+    font-size:1.1em;
+    border-radius: 5px;
+    margin-top: 26px;
+}
+
 
 .footer {
     display: flex;
@@ -67,7 +93,9 @@ body {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
+    background-color: transparent;
 }
+
 
 [type="checkbox"] {
     vertical-align: middle;
@@ -75,6 +103,7 @@ body {
     width: 20px;
     height: 20px;
 }
+
 
 .spacer {
     Width: 50px
