@@ -83,13 +83,11 @@ function App() {
           let newData = data;
           newData[index].completed = isComplete;
           setData(newData);
-          console.log('new data change complete' + JSON.stringify(newData[index]))
         }}
         editData={(newTodo, index) => {
           let newData = data;
           newData[index].todo = newTodo;
           setData(newData);
-          console.log('new todo edit data change complete' + JSON.stringify(newData[index]))
         }}
         mode={mode}
       />
