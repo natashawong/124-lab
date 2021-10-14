@@ -16,8 +16,6 @@ body {
 
 .title {
     text-align: center;
-    margin-left: auto;
-    padding-top: 10px;
 }
 
 .underline {
@@ -32,19 +30,15 @@ body {
 }
 
 .buttons {
-    display: inline;
-    flex-direction: row;
-    margin-left: auto;
-    justify-content: center;
-    text-align: center;
-
-    padding: 10px;
+    margin: right;
+    justify-content: right;
+    text-align: right;
     border-radius: 10px;
     
 }
 
 .plusButton {
-    background-color: #e5989b;
+    background-color: #b5838d;
     width:30px;
     height:30px;
     text-align:center;
@@ -52,7 +46,6 @@ body {
     font-size:1.1em;
     border-radius: 5px;
     margin-left: 10px;
-    margin-top: 26px;
 
 }
 
@@ -67,47 +60,61 @@ body {
 }
 
 .doneButton {
-    background-color: #e5989b;
+    background-color: #9d8189;
+    color: white;
     width: 60px;
     height:30px;
     text-align:center;
     line-height:1.1em;
     font-size:1.1em;
     border-radius: 5px;
-    margin-top: 26px;
 }
 
 
 .footer {
-    display: inline;
-    flex-direction: row;
-    margin-left: auto;
-    justify-content: center;
-    text-align: center;
-    padding: 10px;
-    border-radius: 10px;
+    display: flex;
+    margin-top: 100%;
+    justify-content: end;
+    margin-left: 10px;
+}
+
+.showCompleted {
+    background-color: #e5989b;
+    width: 80px;
+    height: 50px;
+    text-align:center;
+    line-height:1.1em;
+    font-size: small;
+    border-radius: 5px;
+    margin-right: 10px;
+}
+
+.deleteCompleted {
+    background-color: #b5838d;
+    width: 80px;
+    height: 50px;
+    text-align:center;
+    line-height:1.1em;
+    font-size: small;
+    border-radius: 5px;
 }
 
 .input {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    background-color: transparent;
+    color: green;
 }
 
 
 [type="checkbox"] {
     vertical-align: middle;
-    margin: 29px 15px 5px 15px;
+    margin: 15px 15px 5px 15px;
+    background-color: green;
     width: 20px;
     height: 20px;
 }
 
-
-.spacer {
-    Width: 50px
-   }
-
-.spacer2 {
-    Width: 10px
-   }
+[type="text"]{
+    background-color : #d1d1d1; 
+  }
