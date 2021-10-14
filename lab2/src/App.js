@@ -1,7 +1,8 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useState } from 'react';
 import List from './List';
-import ToggleFilterButton from './ToggleFilterButton';
+
 import './styles.css';
+import {filterType, modeType} from './Constants';
 
 function App() {
   const initialData = [
@@ -16,17 +17,6 @@ function App() {
       completed: false,
     }
   ]
-
-  const filterType = {
-    showAll: "SHOW_ALL",
-    hideCompleted: "HIDE_COMPLETED",
-  }
-
-  const modeType = {
-    add: "ADD",
-    edit: "EDIT",
-    base: "BASE",
-  }
 
   const [data, setData] = useState(initialData);
   const [filter, setFilterType] = useState(filterType.showAll);
@@ -104,20 +94,15 @@ function App() {
       />
 
       <div className="footer">
-              {mode === modeType.edit && 
-                <>
-                  {deleteAllowed && <button className="button deleteSelected" onClick={deleteSelected}>Delete Selected</button>}
-                  {filter === filterType.hideCompleted ? 
-                    <button className="button showCompleted" onClick={() => setFilterType(filterType.showAll)}>Show All</button> :
-                    <button className="button showCompleted" onClick={() => setFilterType(filterType.hideCompleted)}>Hide Completed</button>
-                  }
-                  <button className="button deleteCompleted" onClick={deleteSelected}>Delete Completed</button> 
-                </>}
-                {/* <ToggleFilterButton
-                  filter={filter}
-                  setFilterType={(filterT) => setFilterType(filterT)}
-                  mode={mode}
-                /> */}
+        {mode === modeType.edit && 
+          <>
+            {deleteAllowed && <button className="button deleteSelected" onClick={deleteSelected}>Delete Selected</button>}
+            {filter === filterType.hideCompleted ? 
+              <button className="button showCompleted" onClick={() => setFilterType(filterType.showAll)}>Show All</button> :
+              <button className="button showCompleted" onClick={() => setFilterType(filterType.hideCompleted)}>Hide Completed</button>
+            }
+            <button className="button deleteCompleted" onClick={deleteSelected}>Delete Completed</button> 
+          </>}
       </div>
     </>
   );

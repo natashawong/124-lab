@@ -1,9 +1,5 @@
-import React, { useEffect, useState } from 'react';
-
-const filterType = {
-    showAll: "SHOW_ALL",
-    hideCompleted: "HIDE_COMPLETED",
-  }
+import React, { useState } from 'react';
+import {filterType} from './Constants';
 
 function List(props) {
     const filteredData = props.filterType === filterType.hideCompleted ? props.data.filter(item => !item.completed) : props.data
