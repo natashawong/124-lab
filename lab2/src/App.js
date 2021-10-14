@@ -96,7 +96,8 @@ function App() {
       <div className="footer">
               {mode === modeType.edit && 
                 <> 
-                  <button className="button showCompleted" onClick={() => setFilterType(filterType.showCompleted)}>Show Completed</button>
+                  <button className="button deleteSelected">Delete Selected</button>
+                  <button className="button showCompleted" onClick={() => setFilterType(filterType.showCompleted)}>Hide Completed</button>
                   <button className="button deleteCompleted">Delete Completed</button> 
                 </>}
                 {/* <ToggleFilterButton
