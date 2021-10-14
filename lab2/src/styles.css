@@ -79,14 +79,13 @@ body {
 
 
 .footer {
-    display: flex;
-    margin-top: 100%;
-    justify-content: end;
-}
-
-.footer h1:first-child {
-    margin-left: 20px;
-    padding-right: 20px;
+    display: inline;
+    flex-direction: row;
+    margin-left: auto;
+    justify-content: center;
+    text-align: center;
+    padding: 10px;
+    border-radius: 10px;
 }
 
 .input {

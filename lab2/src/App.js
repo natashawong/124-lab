@@ -54,8 +54,8 @@ function App() {
           </div>
           <div className="buttons">
               {adding || editing ? 
-                  (<button class="button doneButton" onClick={doneClicked}>Done</button>)
-                  : 
+                   (<button class="button doneButton" onClick={doneClicked}>Done</button>)
+                  :
                   (
                     <>
                     <button class="button editButton" onClick={() => setEditing(true)}>Edit</button>
@@ -64,6 +64,18 @@ function App() {
                   )
               }
           </div>
+          <div class="footer">
+              {!adding && editing ? 
+               (
+                <> 
+                  <button class="button showCompleted">Show Completed</button>
+                  <button class="button deleteCompleted">Delete Completed</button> 
+                </>
+               )
+              :
+                <></>
+              }
+            </div>
       </div>
       <List
         data={data} 
