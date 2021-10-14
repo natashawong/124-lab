@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 const filterType = {
     showAll: "SHOW_ALL",
@@ -6,7 +6,7 @@ const filterType = {
 }
 
 function List(props) {
-    const filteredData = props.filterType === filterType.showCompleted ? props.data.filter(item => !item.completed) : props.data
+    const filteredData = props.filterType === filterType.showCompleted ? props.data.filter(item => item.completed) : props.data
     const [todo, setTodo] = useState({})
     
     function handleChange(index) {

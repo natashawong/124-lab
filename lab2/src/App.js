@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import List from './List';
+import ToggleFilterButton from './ToggleFilterButton';
 import './styles.css';
 
 function App() {
@@ -90,7 +91,7 @@ function App() {
       />
 
       {console.log(data)}
-      {/* TODO: fix weird bug with checkbox + delete completed + toggle show completed and show all */}
+      {/* TODO: delete completed + toggle show completed and show all */}
 
       <div className="footer">
               {mode === modeType.edit && 
@@ -98,7 +99,12 @@ function App() {
                   <button className="button showCompleted" onClick={() => setFilterType(filterType.showCompleted)}>Show Completed</button>
                   <button className="button deleteCompleted">Delete Completed</button> 
                 </>}
-            </div>
+                {/* <ToggleFilterButton
+                  filter={filter}
+                  setFilterType={(filterT) => setFilterType(filterT)}
+                  mode={mode}
+                /> */}
+      </div>
     </>
   );
 }
