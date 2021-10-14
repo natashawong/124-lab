@@ -75,7 +75,18 @@ body {
     display: flex;
     margin-top: 100%;
     justify-content: end;
-    margin-left: 10px;
+    margin-bottom: 10px;
+}
+
+.deleteSelected {
+    background-color: #e5989b;
+    width: 80px;
+    height: 50px;
+    text-align:center;
+    line-height:1.1em;
+    font-size: small;
+    border-radius: 5px;
+    margin-right: 10px;
 }
 
 .showCompleted {
@@ -87,6 +98,7 @@ body {
     font-size: small;
     border-radius: 5px;
     margin-right: 10px;
+    margin-bottom: 15px;
 }
 
 .deleteCompleted {
