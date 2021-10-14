@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import List from './List';
 import './styles.css';
 
@@ -14,13 +14,24 @@ function App() {
       id: 2,
       todo: "Eat lunch",
       completed: false,
-      focus: true,
+      focus: false,
     }
   ]
 
+  const filterType = {
+    showAll: "SHOW_ALL",
+    showCompleted: "SHOW_COMPLETED",
+  }
+
+  const modeType = {
+    add: "ADD",
+    edit: "EDIT",
+    base: "BASE",
+  }
+
   const [data, setData] = useState(initialData);
-  const [adding, setAdding] = useState(false);
-  const [editing, setEditing] = useState(false);
+  const [filter, setFilterType] = useState(filterType.showAll);
+  const [mode, setMode] = useState(modeType.base);
 
   function plusClicked() {
       let newId = data.length;
@@ -34,7 +45,7 @@ function App() {
       })
 
       setData(newData);
-      setAdding(true);
+      setMode(modeType.add);
   }
 
   function doneClicked() {
@@ -42,20 +53,19 @@ function App() {
     data[data.length-1].todo === "" && newData.pop()
 
     setData(newData);
-    setEditing(false);
-    setAdding(false);
+    setMode(modeType.base);
   }
 
   return (
     <>
       <div className="buttons">
-          {adding || editing ? 
-                (<button class="button doneButton" onClick={doneClicked}>Done</button>)
+          {(mode === modeType.add || mode === modeType.edit) ? 
+                (<button className="button doneButton" onClick={doneClicked}>Done</button>)
               :
               (
                 <>
-                <button class="button editButton" onClick={() => setEditing(true)}>Edit</button>
-                <button class="button plusButton" onClick={plusClicked}>+</button> 
+                <button className="button editButton" onClick={() => setMode(modeType.edit)}>Edit</button>
+                <button className="button plusButton" onClick={plusClicked}>+</button> 
                 </>
               )
           }
@@ -65,27 +75,31 @@ function App() {
               <h1 className="underline">To-do list</h1>
           </div>
       </div>
+
       <List
         data={data} 
-        filterType="showCompleted"
+        filterType={filter}
         setData={(isComplete, index) => {
           let newData = data;
           newData[index].completed = isComplete;
           setData(newData);
-          console.log('new data change complete' + newData)
+          console.log('new data change complete' + JSON.stringify(newData[index]))
         }}
+        editData={(newTodo, index) => {
+          let newData = data;
+          newData[index].todo = newTodo;
+          setData(newData);
+          console.log('new todo edit data change complete' + JSON.stringify(newData[index]))
+        }}
+        mode={mode}
       />
-      <div class="footer">
-              {!adding && editing ? 
-               (
+
+      <div className="footer">
+              {mode === modeType.edit && 
                 <> 
-                  <button class="button showCompleted">Show Completed</button>
-                  <button class="button deleteCompleted">Delete Completed</button> 
-                </>
-               )
-              :
-                <></>
-              }
+                  <button className="button showCompleted" onClick={() => setFilterType(filterType.showCompleted)}>Show Completed</button>
+                  <button className="button deleteCompleted">Delete Completed</button> 
+                </>}
             </div>
     </>
   );
