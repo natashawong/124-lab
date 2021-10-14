@@ -19,7 +19,7 @@ function App() {
 
   const filterType = {
     showAll: "SHOW_ALL",
-    showCompleted: "SHOW_COMPLETED",
+    hideCompleted: "HIDE_COMPLETED",
   }
 
   const modeType = {
@@ -31,6 +31,7 @@ function App() {
   const [data, setData] = useState(initialData);
   const [filter, setFilterType] = useState(filterType.showAll);
   const [mode, setMode] = useState(modeType.base);
+  const [deleteAllowed, setDeleteAllowed ] = useState(false);
 
   function plusClicked() {
       let newId = data.length;
@@ -48,10 +49,22 @@ function App() {
 
   function doneClicked() {
     let newData = data;
-    data[data.length-1].todo === "" && newData.pop()
+    if (data.length > 1) {data[data.length-1].todo === "" && newData.pop()}
 
     setData(newData);
     setMode(modeType.base);
+  }
+
+  function editClicked() {
+    data.map((items, i) => {
+      if (items.completed) {setDeleteAllowed(true)}
+    })
+    setMode(modeType.edit);
+  }
+
+  function deleteSelected() {
+    const newData = data.filter((item) => !item.completed)
+    setData(newData);
   }
 
   return (
@@ -62,7 +75,7 @@ function App() {
               :
               (
                 <>
-                <button className="button editButton" onClick={() => setMode(modeType.edit)}>Edit</button>
+                <button className="button editButton" onClick={editClicked}>Edit</button>
                 <button className="button plusButton" onClick={plusClicked}>+</button> 
                 </>
               )
@@ -90,15 +103,15 @@ function App() {
         mode={mode}
       />
 
-      {console.log(data)}
-      {/* TODO: delete completed + toggle show completed and show all */}
-
       <div className="footer">
               {mode === modeType.edit && 
-                <> 
-                  <button className="button deleteSelected">Delete Selected</button>
-                  <button className="button showCompleted" onClick={() => setFilterType(filterType.showCompleted)}>Hide Completed</button>
-                  <button className="button deleteCompleted">Delete Completed</button> 
+                <>
+                  {deleteAllowed && <button className="button deleteSelected" onClick={deleteSelected}>Delete Selected</button>}
+                  {filter === filterType.hideCompleted ? 
+                    <button className="button showCompleted" onClick={() => setFilterType(filterType.showAll)}>Show All</button> :
+                    <button className="button showCompleted" onClick={() => setFilterType(filterType.hideCompleted)}>Hide Completed</button>
+                  }
+                  <button className="button deleteCompleted" onClick={deleteSelected}>Delete Completed</button> 
                 </>}
                 {/* <ToggleFilterButton
                   filter={filter}

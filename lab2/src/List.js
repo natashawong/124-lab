@@ -2,11 +2,11 @@ import React, { useEffect, useState } from 'react';
 
 const filterType = {
     showAll: "SHOW_ALL",
-    showCompleted: "SHOW_COMPLETED",
-}
+    hideCompleted: "HIDE_COMPLETED",
+  }
 
 function List(props) {
-    const filteredData = props.filterType === filterType.showCompleted ? props.data.filter(item => item.completed) : props.data
+    const filteredData = props.filterType === filterType.hideCompleted ? props.data.filter(item => !item.completed) : props.data
     const [todo, setTodo] = useState({})
     
     function handleChange(index) {
@@ -27,7 +27,7 @@ function List(props) {
         <div>
             {filteredData.map((item, i) => (
                 <div className = "input" key={i}>
-                <input type="checkbox" id={i} name={i} onChange={handleChange(i)}/>
+                <input type="checkbox" id={i} name={i} disabled={props.mode === "EDIT"} onChange={handleChange(i)}/>
                     {props.mode === "EDIT" ? 
                         <input id={i} name={i} value={todo.i} onChange={onEdit(i)}/> :
                     (props.mode === "ADD" && i === filteredData.length-1) ?
