@@ -90,6 +90,7 @@ function App() {
       />
 
       {console.log(data)}
+      {/* TODO: fix weird bug with checkbox + delete completed + toggle show completed and show all */}
 
       <div className="footer">
               {mode === modeType.edit && 
