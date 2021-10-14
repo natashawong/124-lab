@@ -21,17 +21,19 @@ function App() {
   const [data, setData] = useState(initialData);
   const [filter, setFilterType] = useState(filterType.showAll);
   const [mode, setMode] = useState(modeType.base);
-  const [deleteAllowed, setDeleteAllowed ] = useState(false);
+  const [atLeastOneSelected, setAtLeastOneSelected ] = useState(false);
+  const [latestId, setLatestId] = useState(3);
 
   function plusClicked() {
-      let newId = data.length;
       let newData = data;
 
       newData.push({
-          id: newId,
+          id: latestId,
           todo: "",
           completed: false,
       })
+      let newId = latestId + 1;
+      setLatestId(newId);
 
       setData(newData);
       setMode(modeType.add);
@@ -46,15 +48,19 @@ function App() {
   }
 
   function editClicked() {
-    data.map((items, i) => {
-      if (items.completed) {setDeleteAllowed(true)}
+    data.map((item, i) => {
+      if (item.completed) {setAtLeastOneSelected(true)}
     })
     setMode(modeType.edit);
   }
 
   function deleteSelected() {
-    const newData = data.filter((item) => !item.completed)
+    let newData = data.filter((item) => !item.completed)
+    newData.map((item, i) => {
+      item.completed = false;
+    })
     setData(newData);
+    console.log(newData);
   }
 
   return (
@@ -96,8 +102,8 @@ function App() {
       <div className="footer">
         {mode === modeType.edit && 
           <>
-            {deleteAllowed && <button className="button deleteSelected" onClick={deleteSelected}>Delete Selected</button>}
-            {filter === filterType.hideCompleted ? 
+            {atLeastOneSelected && <button className="button deleteSelected" onClick={deleteSelected}>Delete Selected</button>}
+            {filter === filterType.hideCompleted && atLeastOneSelected ? 
               <button className="button showCompleted" onClick={() => setFilterType(filterType.showAll)}>Show All</button> :
               <button className="button showCompleted" onClick={() => setFilterType(filterType.hideCompleted)}>Hide Completed</button>
             }
