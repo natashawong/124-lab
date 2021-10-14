@@ -7,14 +7,12 @@ function App() {
     {
       id: 1,
       todo: "Call mom",
-      completed: true,
-      focus: false,
+      completed: false,
     },
     {
       id: 2,
       todo: "Eat lunch",
       completed: false,
-      focus: false,
     }
   ]
 
@@ -41,7 +39,6 @@ function App() {
           id: newId,
           todo: "",
           completed: false,
-          focus: true,
       })
 
       setData(newData);
@@ -91,6 +88,8 @@ function App() {
         }}
         mode={mode}
       />
+
+      {console.log(data)}
 
       <div className="footer">
               {mode === modeType.edit && 
