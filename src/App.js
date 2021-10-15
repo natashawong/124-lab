@@ -102,7 +102,6 @@ function App() {
       <div className="footer">
         {mode === modeType.edit && 
           <>
-            {atLeastOneSelected && <button className="button deleteSelected" onClick={deleteSelected}>Delete Selected</button>}
             {filter === filterType.hideCompleted && atLeastOneSelected ? 
               <button className="button showCompleted" onClick={() => setFilterType(filterType.showAll)}>Show All</button> :
               <button className="button showCompleted" onClick={() => setFilterType(filterType.hideCompleted)}>Hide Completed</button>
