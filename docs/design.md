@@ -40,6 +40,8 @@ For figures n.2 and n.4 (where n is 1, 2, 3), we thought that the buttons did no
 
 ## User Testing
 
+We let our users test our inital application in-person. Their comments have been reflected above. After redesigning, re-tested the application with the same people. Since they've already seen the application they already know how the application works. We sent our users our github page for them to test. The screenshots below show their responses to the page.
+
 ### User testing 1
 
 ![usertest1](images/usertest1.png)
@@ -48,6 +50,8 @@ For figures n.2 and n.4 (where n is 1, 2, 3), we thought that the buttons did no
 
 ![usertest2](images/usertest2.png)
 
+For future labs, we want to test different people. People who have not seen the application before but also the same people who have seen this application to get more feedback. We will want to try to have someone in our class test the our application to get a developers perspective, since developers are also users.
+
 ## Final Design
 
 When you land on our page, it will look like this. We added two items just to give examples of the list.
@@ -55,12 +59,15 @@ When you land on our page, it will look like this. We added two items just to gi
 ![initial_page](images/initial_page.png)
 
 However, if there are no items, the list would look like this. 
+
 ![no_items](images/no_items.png)
 
 When we click the + button, our app looks like
+
 ![adding_mode](images/adding_mode.png)
 
 In editing mode, the app will look like
+
 ![editing_mode](images/editing_mode.png)
 
 Let's add "submit lab 2" as a to-do element by clicking the add button and adding lab 2
