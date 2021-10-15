@@ -40,9 +40,62 @@ For figures n.2 and n.4 (where n is 1, 2, 3), we thought that the buttons did no
 
 ## User Testing
 
+### User testing 1
+
+![usertest1](images/usertest1.png)
+
+### User testing 2
+
+![usertest2](images/usertest2.png)
+
 ## Final Design
 
+When you land on our page, it will look like this. We added two items just to give examples of the list.
 
+![initial_page](images/initial_page.png)
+
+However, if there are no items, the list would look like this. 
+![no_items](images/no_items.png)
+
+When we click the + button, our app looks like
+![adding_mode](images/adding_mode.png)
+
+In editing mode, the app will look like
+![editing_mode](images/editing_mode.png)
+
+Let's add "submit lab 2" as a to-do element by clicking the add button and adding lab 2
+
+![add](images/add.png)
+
+then let's leave adding mode.
+
+![added](images/added.png)
+
+Oh no we meant lab 2 not lab 1. Let's go edit that now using the edit button
+
+![edited_edit](images/edited_edit.png)
+
+That's better. We don't need to edit anymore this is perfect.  Well, we've already called mom and eaten lunch, so we will check those boxes.
+
+![checked](images/checked.png)
+
+Now, we don't need these reminders anymore right now. Let's hide that first using the hide completed button, which is in the editing mode
+
+![edit_checked](images/edit_checked.png)
+![hide_checked](images/hide_checked.png)
+
+Wait, did we hide it? Is it still there? Let's see if it's all here. Let's click show all and click done
+
+![show_checked](images/show_checked.png)
+![done_checked](images/done_checked.png)
+
+Okay. We don't actually need it anymore so let's delete that using the delete completed button.
+
+![delete_checked](images/delete_checked.png)
+
+That's better. We're done editing. We just need to submit our lab so we can click the done button.
+
+![exit_edit_mode](images/exit_edit_mode.png)
 
 
 ## Reflection
