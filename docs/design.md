@@ -112,6 +112,8 @@ Our biggest challenge for this lab was that we were unable to add the autofocus 
 
 Furthermore, since we added a background color, the input form had a white background and we struggled changing this. However, since we were not able to implement autofocus, we decided to keep the box for now to help indicate that there is new to-do list is being made when in adding mode.
 
+Lastly, we had issues when we have hidden completed items, we cannot complete more items. Thus, we hope to be able to fix this for next lab.
+
 ### Successes
 
 On the success side, we were proud of the fact that we had gotten the edit and add buttons to work cleanly. We think the particular touch where we automatically remove a Todo if it has no text in it works smoothly. Further, we struggled a fair bit with getting the various states to match up and work well with each other when the user is changing the text, checkboxes, and adjusting whether they are in editing, base, or adding mode. We thought deeply about each state and what is necesary and not necessary for the user: for example, during editing we allow for the text to change but not for the checkboxes to prevent errors to occur as the "delete completed" button is now available to be clicked. Additionally, we also make it so the Todos are in a readonly and non-editable state when not in the edit state to prevent users accidentally changing the todo. If a user were to be in the adding state, only the last and new todo is editable while the rest are not as well. We believe that putting thought into these small actions helps create a significantly better user experience. 
