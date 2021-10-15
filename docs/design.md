@@ -27,7 +27,7 @@ One major design change we implemented is the css color styling. When we initial
 
 Additional changes were made to the buttons. First, the footer buttons don't show up unless they are in edit mode (figure 3). Therefore, when users click the + button, they do not have the option to edit or show other to-do items (figure 2); these other items are then read-only. Figure 4 depicts how the page would look like assuming someone clicked the hide completed button. This will prompt the button to change and say "show compeleted" instead. We also decided to add the top buttons as part of the header instead of in-line with the title.
 
-Not reflected on the images is that we want to be able to indicate that when you click the + button, you are able to edit the new reminder. We will do this by have an autofocus component on the new element. We also made it so that if you clicked add
+Not reflected on the images is that we want to be able to indicate that when you click the + button, you are able to edit the new reminder. We will do this by have an autofocus component on the new element. This unfortunately did not make it to the actual implementation as we struggled to get it to work.
 
 ### Alternate Designs
 
@@ -53,3 +53,5 @@ Our biggest challenge for this lab was that we were unable to add the autofocus 
 Furthermore, since we added a background color, the input form had a white background and we struggled changing this. However, since we were not able to implement autofocus, we decided to keep the box for now to help indicate that there is new to-do list is being made when in adding mode.
 
 ### Successes
+
+On the success side, we were proud of the fact that we had gotten the edit and add buttons to work cleanly. We think the particular touch where we automatically remove a Todo if it has no text in it works smoothly. Further, we struggled a fair bit with getting the various states to match up and work well with each other when the user is changing the text, checkboxes, and adjusting whether they are in editing, base, or adding mode. We thought deeply about each state and what is necesary and not necessary for the user: for example, during editing we allow for the text to change but not for the checkboxes to prevent errors to occur as the "delete completed" button is now available to be clicked. Additionally, we also make it so the Todos are in a readonly and non-editable state when not in the edit state to prevent users accidentally changing the todo. If a user were to be in the adding state, only the last and new todo is editable while the rest are not as well. We believe that putting thought into these small actions helps create a significantly better user experience. 
