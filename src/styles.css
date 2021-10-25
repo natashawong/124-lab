@@ -1,0 +1,131 @@
+.container {
+    display: flex;
+    flex-direction: column;
+}
+
+html {
+    height: 100%;
+}
+
+body {
+    margin: 50px;
+    height: 100%;
+    background-color: #f8edeb;
+    
+}
+
+.title {
+    text-align: center;
+}
+
+.underline {
+    text-decoration: underline;
+}
+
+.body-container {
+    justify-content: center;
+    display: flex;
+    flex-direction: row;
+    width: '100%';
+}
+
+.buttons {
+    justify-content: right;
+    text-align: right;
+    border-radius: 10px;
+    
+}
+
+.plusButton {
+    background-color: #b5838d;
+    width:30px;
+    height:30px;
+    text-align: center;
+    line-height:1.1em;
+    font-size:1.1em;
+    border-radius: 5px;
+    margin-left: 10px;
+
+}
+
+.editButton {
+    background-color: #e5989b;
+    width:50px;
+    height:30px;
+    text-align: center;
+    line-height:1.1em;
+    font-size:1.1em;
+    border-radius: 5px;
+}
+
+.doneButton {
+    background-color: #81060b9c;
+    color: white;
+    width: 60px;
+    height:30px;
+    text-align: center;
+    line-height:1.1em;
+    font-size:1.1em;
+    border-radius: 5px;
+}
+
+
+.footer {
+    display: flex;
+    margin-top: 100%;
+    justify-content: end;
+    margin-bottom: 10px;
+}
+
+.deleteSelected {
+    background-color: #e5989b;
+    width: 80px;
+    height: 50px;
+    text-align:center;
+    line-height:1.1em;
+    font-size: small;
+    border-radius: 5px;
+    margin-right: 10px;
+}
+
+.showCompleted {
+    background-color: #e5989b;
+    width: 80px;
+    height: 50px;
+    text-align:center;
+    line-height:1.1em;
+    font-size: small;
+    border-radius: 5px;
+    margin-right: 10px;
+    margin-bottom: 15px;
+}
+
+.deleteCompleted {
+    background-color: #b5838d;
+    width: 80px;
+    height: 50px;
+    text-align:center;
+    line-height:1.1em;
+    font-size: small;
+    border-radius: 5px;
+}
+
+.input {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    color: green;
+}
+
+
+[type="checkbox"] {
+    vertical-align: middle;
+    margin: 15px 15px 5px 15px;
+    background-color: green;
+    width: 20px;
+    height: 20px;
+}
+
+[type="text"]{
+    background-color : #d1d1d1; 
+  }
