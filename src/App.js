@@ -70,26 +70,36 @@ function App() {
 
   function doneClicked() {
     let newData = data;
+    // if collection.doc(personId).
     if (data.length > 1) {data[data.length-1].todo === "" && newData.pop()}
 
     setData(newData);
     setMode(modeType.base);
   }
 
-  function editClicked() {
-    data.map((item, i) => {
-      if (item.completed) {setAtLeastOneSelected(true)}
-    })
+  function editClicked(todoObj) {
+
+    // data.map((item, i) => {
+    //   if (item.completed) {setAtLeastOneSelected(true)}
+    // })
+    editTodo(todoObj);
     setMode(modeType.edit);
   }
 
-  function deleteSelected() {
-    let newData = data.filter((item) => !item.completed)
-    newData.map((item, i) => {
-      item.completed = false;
-    })
+  function deleteSelected(personId) {
+    // let newData = data.filter((item) => !item.completed)
+    // newData.map((item, i) => {
+    //   item.completed = false;
+    // })
+    removeTodo(todoObj);
     setData(newData);
-    console.log(newData);
+    // console.log(newData);
+  }
+
+  function generatePeopleData() {
+    if (value) {
+      return value.docs.map(e => (return (... e.data(), e.id)));
+    }
   }
 
   return (
