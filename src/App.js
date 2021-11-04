@@ -24,7 +24,7 @@ const db = firebase.firestore();
 function App() {
   const collection = db.collection('natasha-bettina-124');
 
-  const [query, setQuery] = useState(useCollection(collection));
+  const [query, setQuery] = useState(collection);
 
   const [todoListData, setTodoListData] = useState([]);
   const [lastId, setLastId] = useState("");
@@ -32,24 +32,16 @@ function App() {
   const [mode, setMode] = useState(modeType.base);
   const [atLeastOneSelected, setAtLeastOneSelected ] = useState(false);
 
+  const [value, error, loading] = useCollection(query);
+
   useEffect(() => {
     let data = [];
-    if (query) {
-      data = query.docs.map((doc) => {
+    if (value) {
+      data = value.docs.map((doc) => {
            return {...doc.data()}});
       setTodoListData(data);
     }
-  }, [query])
-
-  const useFetch = (query) => {
-    const [value, loading, error] = useCollection(query);
-
-    if (value) {
-      let data = value.docs.map((doc) => {
-        return {...doc.data()}});
-      setTodoListData(data);
-    }
-  }
+  }, [value])
 
   function plusClicked() {
     // Adds an empty Todo
@@ -96,7 +88,7 @@ function App() {
   function handleSortChange(e) {
     const sortType = e.target.value;
     const sortQuery = collection.orderBy(sortType, 'asc');
-    setQuery(useCollection(sortQuery));
+    setQuery(sortQuery);
   }
 
   return (
