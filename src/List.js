@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import {filterType} from './Constants';
 
-function List(props) {
+export default function List(props) {
+    console.log("props.data" + JSON.stringify(props.data))
     const filteredData = props.filterType === filterType.hideCompleted ? props.data.filter(item => !item.completed) : props.data
     // console.log('in List', filteredData.map((item, i) => (console.log(item))));
     const [todo, setTodo] = useState({});
@@ -43,7 +44,7 @@ function List(props) {
                     <button onclick="onDropDown()" class="dropbtn">Dropdown</button>
                     <div id="myDropdown" class="dropdown-content">
                         <div class='option' id='option1'>High</div>
-                        <div class='option' id='option2'>Medium</div>
+                        <div class='{ption' id='option2'>Medium</div>
                         <div class='option' id='option3'>Low</div>
                     </div>
                     </div>
@@ -52,5 +53,3 @@ function List(props) {
         </div>
     )
 }
-
-export default List;

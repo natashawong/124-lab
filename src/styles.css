@@ -69,11 +69,21 @@ body {
     width: '100%';
 }
 
+.mainDropdown {
+    background-color: #b5838d;
+    width: 90px;
+    height: 30px;
+    margin-right: 10px;
+    border-radius: 5px;
+    line-height:1.1em;
+    font-size:1.1em;
+}
+
 .buttons {
-    justify-content: right;
+    justify-content: space-between;
     text-align: right;
-    border-radius: 10px;
-    
+    display: flex;
+    border-radius: 10px;   
 }
 
 .plusButton {
