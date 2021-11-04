@@ -7,6 +7,7 @@ export default function List(props) {
     // console.log('in List', filteredData.map((item, i) => (console.log(item))));
     const [todo, setTodo] = useState({});
     const [checked, setChecked] = useState({});
+    const [priorityLevel, setPriorityLevel] = useState({});
     
     function handleChange(index) {
         return (e) => {
@@ -23,30 +24,32 @@ export default function List(props) {
         }
     }
 
-    function onDropDown() {
-
+    function handlePriorityChange(index) {
+        return (e) => {
+            setPriorityLevel( prevState => ({...prevState, [e.target.name] : e.target.value}))
+            // props.onSetData(e.target.value, index);
+        }
     }
+
+    // TODO: fix UI, add props ^^ above similar to "onEditData" to update the collection priority levels
 
     return(
         <div>
             {filteredData.map((item, i) => (
                 <div className="container">
-                <div className = "input" key={i}>
-                <input type="checkbox" id={item.id} name={i} disabled={props.mode === "EDIT"} checked={item.completed} onChange={handleChange(item.id)} class='regular-checkbox'/>
-                    {props.mode === "EDIT" ? 
-                        <input type='text' id={item.id} name={i} value={item.todo} onChange={onEdit(item.id)}/> :
-                    (props.mode === "ADD" && item.id === props.lastId) ?
-                        <input type='text' id={item.id} name={i} value={item.todo} onChange={onEdit(item.id)}/> :
-                        <input type='text' id={item.id} name={i} value={item.todo} readOnly/>
-                    }
-                </div>
-                <div class="dropdown">
-                    <button onclick="onDropDown()" class="dropbtn">Dropdown</button>
-                    <div id="myDropdown" class="dropdown-content">
-                        <div class='option' id='option1'>High</div>
-                        <div class='{ption' id='option2'>Medium</div>
-                        <div class='option' id='option3'>Low</div>
-                    </div>
+                    <div className = "input" key={i}>
+                    <input type="checkbox" id={item.id} name={i} disabled={props.mode === "EDIT"} checked={item.completed} onChange={handleChange(item.id)} class='regular-checkbox'/>
+                        {props.mode === "EDIT" ? 
+                            <input type='text' id={item.id} name={i} value={item.todo} onChange={onEdit(item.id)}/> :
+                        (props.mode === "ADD" && item.id === props.lastId) ?
+                            <input type='text' id={item.id} name={i} value={item.todo} onChange={onEdit(item.id)}/> :
+                            <input type='text' id={item.id} name={i} value={item.todo} readOnly/>
+                        }   
+                    <select name="listDropdown" className="listDropdown" onChange={handlePriorityChange(item.id)}>
+                        <option value="high">High</option>
+                        <option value="med">Medium</option>
+                        <option value="low">Low</option>
+                    </select>
                     </div>
                 </div>
             ))}

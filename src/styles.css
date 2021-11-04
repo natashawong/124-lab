@@ -167,8 +167,12 @@ body {
 .input {
     display: flex;
     flex-direction: row;
-    flex-wrap: wrap;
     color: green;
+}
+
+.listDropdown {
+    height: 30px;
+    width: 50px;
 }
 
 [type="checkbox"] {
