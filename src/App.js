@@ -52,10 +52,16 @@ function App() {
 
   function editTodo(newTodo, id) {
     // Edits an existing Todo
-    let todoObj = {id: id, todo: newTodo, completed: false}
+    let todoObj = {'id': id, 'todo': newTodo}
     collection.doc(id).update(todoObj);
   }
-  
+
+  function setCompleted(isCompleted, id) {
+    // Edits an existing Todo
+    let todoObj = {'id': id, 'completed': isCompleted}
+    collection.doc(id).update(todoObj);
+  }
+
   function doneClicked() {
     console.log(lastId);
     console.log('donedata ', data);
@@ -98,11 +104,27 @@ function App() {
           </div>
       </div>
 
+      {/* <List
+        data={data} 
+        filterType={filter}
+        setData={(isComplete, index) => {
+          let newData = data;
+          newData[index].completed = isComplete;
+          setData(newData);
+        }}
+        editData={(newTodo, index) => {
+          let newData = data;
+          newData[index].todo = newTodo;
+          setData(newData);
+        }}
+        mode={mode}
+      /> */}
+
       <List
         data={data} 
         filterType={filter}
         onSetData={(isComplete, index) => {
-          data[index].completed = isComplete;
+          setCompleted(isComplete, index)
         }}
         onEditData={(newTodo, index) => {
           editTodo(newTodo, index);

@@ -26,7 +26,7 @@ function List(props) {
         <div>
             {filteredData.map((item, i) => (
                 <div className = "input" key={i}>
-                <input type="checkbox" id={item.id} name={i} disabled={props.mode === "EDIT"} checked={item.completed} onChange={handleChange(i)}/>
+                <input type="checkbox" id={item.id} name={i} disabled={props.mode === "EDIT"} checked={item.completed} onChange={handleChange(item.id)}/>
                     {props.mode === "EDIT" ? 
                         <input id={item.id} name={i} value={item.todo} onChange={onEdit(item.id)}/> :
                     (props.mode === "ADD" && item.id === props.lastId) ?
