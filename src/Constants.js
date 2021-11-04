@@ -8,3 +8,9 @@ export const modeType = {
     edit: "EDIT",
     base: "BASE",
 }
+
+export const priorityType = {
+    high: 3,
+    med: 2,
+    low: 1,
+}

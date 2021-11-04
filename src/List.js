@@ -22,17 +22,31 @@ function List(props) {
         }
     }
 
+    function onDropDown() {
+
+    }
+
     return(
         <div>
             {filteredData.map((item, i) => (
+                <div className="container">
                 <div className = "input" key={i}>
-                <input type="checkbox" id={item.id} name={i} disabled={props.mode === "EDIT"} checked={item.completed} onChange={handleChange(item.id)}/>
+                <input type="checkbox" id={item.id} name={i} disabled={props.mode === "EDIT"} checked={item.completed} onChange={handleChange(item.id)} class='regular-checkbox'/>
                     {props.mode === "EDIT" ? 
-                        <input id={item.id} name={i} value={item.todo} onChange={onEdit(item.id)}/> :
+                        <input type='text' id={item.id} name={i} value={item.todo} onChange={onEdit(item.id)}/> :
                     (props.mode === "ADD" && item.id === props.lastId) ?
-                        <input id={item.id} name={i} value={item.todo} onChange={onEdit(item.id)}/> :
-                        <input id={item.id} name={i} value={item.todo} readOnly/>
+                        <input type='text' id={item.id} name={i} value={item.todo} onChange={onEdit(item.id)}/> :
+                        <input type='text' id={item.id} name={i} value={item.todo} readOnly/>
                     }
+                </div>
+                <div class="dropdown">
+                    <button onclick="onDropDown()" class="dropbtn">Dropdown</button>
+                    <div id="myDropdown" class="dropdown-content">
+                        <div class='option' id='option1'>High</div>
+                        <div class='option' id='option2'>Medium</div>
+                        <div class='option' id='option3'>Low</div>
+                    </div>
+                    </div>
                 </div>
             ))}
         </div>

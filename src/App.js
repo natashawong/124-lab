@@ -6,7 +6,7 @@ import {generateUniqueID} from "web-vitals/dist/modules/lib/generateUniqueID";
 import { map } from '@firebase/util';
 
 import './styles.css';
-import {filterType, modeType} from './Constants';
+import {filterType, modeType, priorityType} from './Constants';
 
 const firebaseConfig = {
   apiKey: "AIzaSyATi5uqr6dkf4iTvqfPHndGwtHXz0O6O-s",
@@ -30,6 +30,7 @@ function App() {
   const [filter, setFilterType] = useState(filterType.showAll);
   const [mode, setMode] = useState(modeType.base);
   const [atLeastOneSelected, setAtLeastOneSelected ] = useState(false);
+  const [priority, setPriority] = useState(priorityType.med);
 
   let data = null;
   if (value) {
@@ -40,8 +41,7 @@ function App() {
   function plusClicked() {
     // Adds an empty Todo
     const newId = generateUniqueID();
-    console.log(newId);
-    collection.doc(newId).set({ id: newId, todo: "", completed: false});
+    collection.doc(newId).set({ id: newId, todo: "", completed: false, priority: 2});
     setLastId(newId);
     setMode(modeType.add);
   }
@@ -57,14 +57,12 @@ function App() {
   }
 
   function setCompleted(isCompleted, id) {
-    // Edits an existing Todo
+    // changes the state of completed
     let todoObj = {'id': id, 'completed': isCompleted}
     collection.doc(id).update(todoObj);
   }
 
   function doneClicked() {
-    console.log(lastId);
-    console.log('donedata ', data);
     if (data.length > 0 && data[data.length-1].todo === "") {removeTodo(lastId)}
     setMode(modeType.base);
   }
@@ -82,10 +80,95 @@ function App() {
     })
   }
 
+  function sortingByName() {
+    const ordered = collection.orderBy('todo', 'asc');
+    console.log(ordered.collection)
+  }
+
+  function sortingByPriority() {
+    collection.orderBy('priority', 'asc');
+  }
+
+  //https://www.freecodecamp.org/news/how-to-create-a-dropdown-menu-with-css-and-javascript/
+
+  // function toggleClass(elem,className){
+  //   if (elem.className.indexOf(className) !== -1){
+  //     elem.className = elem.className.replace(className,'');
+  //   }
+  //   else{
+  //     elem.className = elem.className.replace(/\s+/g,' ') + 	' ' + className;
+  //   }
+  
+  //   return elem;
+  // }
+
+
+  // function toggleDisplay(elem){
+  //   const curDisplayStyle = elem.style.display;			
+  
+  //   if (curDisplayStyle === 'none' || curDisplayStyle === ''){
+  //     elem.style.display = 'block';
+  //   }
+  //   else{
+  //     elem.style.display = 'none';
+  //   }
+  
+  // }
+  
+  // function toggleMenuDisplay(e){
+  //   const dropdown = e.currentTarget.parentNode;
+  //   const menu = dropdown.querySelector('.menu');
+  //   const icon = dropdown.querySelector('.fa-angle-right');
+  
+  //   toggleClass(menu,'hide');
+  //   toggleClass(icon,'rotate-90');
+  // }
+  
+  // function handleOptionSelected(e){
+  //   toggleClass(e.target.parentNode, 'hide');			
+  
+  //   const id = e.target.id;
+  //   const newValue = e.target.textContent + ' ';
+  //   const titleElem = document.querySelector('.dropdown .title');
+  //   const icon = document.querySelector('.dropdown .title .fa');
+  
+  
+  //   titleElem.textContent = newValue;
+  //   titleElem.appendChild(icon);
+  
+  //   //trigger custom event
+  //   document.querySelector('.dropdown .title').dispatchEvent(new Event('change'));
+  //     //setTimeout is used so transition is properly shown
+  //   setTimeout(() => toggleClass(icon,'rotate-90',0));
+  // }
+  
+  // function handleTitleChange(e){
+  //   const result = document.getElementById('result');
+  
+  //   result.innerHTML = 'The result is: ' + e.target.textContent;
+  // }
+  // //get elements
+  // const dropdownTitle = document.querySelector('.dropdown .title');
+  // const dropdownOptions = document.querySelectorAll('.dropdown .option');
+
+  // //bind listeners to these elements
+
+  // if (dropdownTitle){dropdownTitle.addEventListener('click', toggleMenuDisplay);}
+  // dropdownOptions.forEach(option => option.addEventListener('click',handleOptionSelected));
+  // if (document.querySelector('.dropdown .title')) {document.querySelector('.dropdown .title')}
+
   return (
     <div>
     {loading && <h1>Loading</h1>}
     {data && <>
+      {/* <div class="dropdown">
+		        <div class='title pointerCursor'>Select an option <i class="fa fa-angle-right"></i></div>
+                <div class='menu pointerCursor hide'>
+                      <div class='option' id='option1'>Priority</div>
+                      <div class='option' id='option2'>Name</div>
+                      <div class='option' id='option3'>Creation Date</div>
+                  </div>
+              </div> */}
       <div className="buttons">
           {(mode === modeType.add || mode === modeType.edit) ? 
                 (<button className="button doneButton" onClick={doneClicked}>Done</button>)
@@ -94,6 +177,7 @@ function App() {
                 <>
                 <button className="button editButton" onClick={editClicked}>Edit</button>
                 <button className="button plusButton" onClick={plusClicked}>+</button> 
+                <button className="button plusButton" onClick={sortingByName}>Sort name</button> 
                 </>
               )
           }
@@ -103,23 +187,6 @@ function App() {
               <h1 className="underline">To-do list</h1>
           </div>
       </div>
-
-      {/* <List
-        data={data} 
-        filterType={filter}
-        setData={(isComplete, index) => {
-          let newData = data;
-          newData[index].completed = isComplete;
-          setData(newData);
-        }}
-        editData={(newTodo, index) => {
-          let newData = data;
-          newData[index].todo = newTodo;
-          setData(newData);
-        }}
-        mode={mode}
-      /> */}
-
       <List
         data={data} 
         filterType={filter}
