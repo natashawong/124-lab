@@ -24,86 +24,62 @@ const db = firebase.firestore();
 
 function App() {
   const collection = db.collection('natasha-bettina-124');
-  console.log(collection);
   const [value, loading, error] = useCollection(collection);
-  const initialData = value ? value : [{}];
 
-  const [data, setData] = useState(initialData);
+  const [lastId, setLastId] = useState("");
   const [filter, setFilterType] = useState(filterType.showAll);
   const [mode, setMode] = useState(modeType.base);
   const [atLeastOneSelected, setAtLeastOneSelected ] = useState(false);
 
-  function addTodo() {
+  let data = null;
+  if (value) {
+    data = value.docs.map((doc) => {
+         return {...doc.data()}});
+  }
+
+  function plusClicked() {
     // Adds an empty Todo
     const newId = generateUniqueID();
     console.log(newId);
-    console.log("coll", collection.doc(newId));
     collection.doc(newId).set({ id: newId, todo: "", completed: false});
-    console.log(value);
+    setLastId(newId);
+    setMode(modeType.add);
   }
-
+  
   function removeTodo(id) {
     collection.doc(id).delete();
   }
 
-  function editTodo(todoObj) {
+  function editTodo(newTodo, id) {
     // Edits an existing Todo
-    // todoObj is {id:..., todo:..., completed:..}
-    collection.doc(todoObj.id).update(todoObj);
+    let todoObj = {id: id, todo: newTodo, completed: false}
+    collection.doc(id).update(todoObj);
   }
-
-  function plusClicked() {
-      // let newData = data;
-
-      // newData.push({
-      //     id: latestId,
-      //     todo: "",
-      //     completed: false,
-      // })
-      // let newId = latestId + 1;
-      // setLatestId(newId);
-
-      // setData(newData);
-      addTodo();
-      setMode(modeType.add);
-  }
-
+  
   function doneClicked() {
-    let newData = data;
-    // if collection.doc(personId).
-    if (data.length > 1) {data[data.length-1].todo === "" && newData.pop()}
-
-    setData(newData);
+    console.log(lastId);
+    console.log('donedata ', data);
+    if (data.length > 0 && data[data.length-1].todo === "") {removeTodo(lastId)}
     setMode(modeType.base);
   }
 
-  function editClicked(todoObj) {
-
-    // data.map((item, i) => {
-    //   if (item.completed) {setAtLeastOneSelected(true)}
-    // })
-    editTodo(todoObj);
+  function editClicked() {
+    data.map((item, i) => {
+      if (item.completed) {setAtLeastOneSelected(true)}
+    })
     setMode(modeType.edit);
   }
 
   function deleteSelected(personId) {
-    // let newData = data.filter((item) => !item.completed)
-    // newData.map((item, i) => {
-    //   item.completed = false;
-    // })
-    removeTodo(todoObj);
-    setData(newData);
-    // console.log(newData);
-  }
-
-  function generatePeopleData() {
-    if (value) {
-      return value.docs.map(e => (return (... e.data(), e.id)));
-    }
+    data.map((item, i) => {
+      if (item.completed) {removeTodo(item.id)}
+    })
   }
 
   return (
-    <>
+    <div>
+    {loading && <h1>Loading</h1>}
+    {data && <>
       <div className="buttons">
           {(mode === modeType.add || mode === modeType.edit) ? 
                 (<button className="button doneButton" onClick={doneClicked}>Done</button>)
@@ -125,17 +101,14 @@ function App() {
       <List
         data={data} 
         filterType={filter}
-        setData={(isComplete, index) => {
-          let newData = data;
-          newData[index].completed = isComplete;
-          setData(newData);
+        onSetData={(isComplete, index) => {
+          data[index].completed = isComplete;
         }}
-        editData={(newTodo, index) => {
-          let newData = data;
-          newData[index].todo = newTodo;
-          setData(newData);
+        onEditData={(newTodo, index) => {
+          editTodo(newTodo, index);
         }}
         mode={mode}
+        lastId={lastId}
       />
 
       <div className="footer">
@@ -149,6 +122,8 @@ function App() {
           </>}
       </div>
     </>
+          }
+    </div>
   );
 }
 
