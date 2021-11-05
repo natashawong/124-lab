@@ -39,7 +39,7 @@ export default function List(props) {
                             <input type='text' id={item.id} name={i} value={item.todo} onChange={onEdit(item.id)} className="todoTextInput"/> :
                         (props.mode === "ADD" && item.id === props.lastId) ?
                             <input type='text' id={item.id} name={i} value={item.todo} onChange={onEdit(item.id)} className="todoTextInput"/> :
-                            <input type='text' id={item.id} name={i} value={item.todo} readOnly className="todoTextInput"/>
+                            <input type='text' id={item.id} name={i} value={item.todo} readOnly className="todoTextInput" style={{outline: "none"}}/>
                         }   
                     <select name="listDropdown"className="listDropdown" onChange={handlePriorityChange(item.id)}>
                         <option value="1" selected={item.priority === "1"}>High</option>

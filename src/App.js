@@ -32,6 +32,8 @@ function App() {
   const [mode, setMode] = useState(modeType.base);
   const [atLeastOneSelected, setAtLeastOneSelected ] = useState(false);
 
+  console.log("filter: " + filter);
+
   const [value, error, loading] = useCollection(query);
 
   useEffect(() => {
@@ -100,6 +102,17 @@ function App() {
     setQuery(sortQuery);
   }
 
+  function showHideButtons() {
+    return (
+        <>
+        {filter === filterType.hideCompleted ?
+        <button className="button showCompleted" onClick={() => setFilterType(filterType.showAll)}>Show All</button> :
+        <button className="button showCompleted" onClick={() => setFilterType(filterType.hideCompleted)}>Hide Completed</button>}
+        <button className="button deleteCompleted" onClick={deleteSelected}>Delete Completed</button> 
+        </>
+    )
+  }
+
   return (
     <div>
     {query.loading && <h1>Loading</h1>}
@@ -147,12 +160,10 @@ function App() {
         lastId={lastId}
       />
 
+      {console.log(todoListData.filter(i => i.completed).length > 0)}
+
       <div className="footer">
-          {filter === filterType.hideCompleted && atLeastOneSelected ? 
-            <button className="button showCompleted" onClick={() => setFilterType(filterType.showAll)}>Show All</button> :
-            <button className="button showCompleted" onClick={() => setFilterType(filterType.hideCompleted)}>Hide Completed</button>
-          }
-          <button className="button deleteCompleted" onClick={deleteSelected}>Delete Completed</button> 
+          {todoListData.filter(i => i.completed).length > 0 && showHideButtons()}
       </div>
     </>
           }
