@@ -50,6 +50,14 @@ Note: previous functionality such as editing, deleting, adding todos are in `des
 
 ![new_task_high](images/five.png)
 
+6. No todos are selected
+
+![none_selected](images/six.png)
+
+7. Some todos are selected
+
+![some_selected](images/seven.png)
+
 ## Reflection
 ### Challenges
 
