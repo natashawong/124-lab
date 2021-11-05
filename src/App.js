@@ -6,6 +6,7 @@ import {generateUniqueID} from "web-vitals/dist/modules/lib/generateUniqueID";
 
 import './styles.css';
 import {filterType, modeType, priorityType} from './Constants';
+import { Timestamp } from '@firebase/firestore';
 
 const firebaseConfig = {
   apiKey: "AIzaSyATi5uqr6dkf4iTvqfPHndGwtHXz0O6O-s",
@@ -46,7 +47,8 @@ function App() {
   function plusClicked() {
     // Adds an empty Todo
     const newId = generateUniqueID();
-    collection.doc(newId).set({ id: newId, todo: "", completed: false, priority: 2});
+    let currDate = firebase.firestore.Timestamp.now();
+    collection.doc(newId).set({ id: newId, todo: "", completed: false, priority: 2, creationdate: currDate});
     setLastId(newId);
     setMode(modeType.add);
   }
@@ -94,7 +96,8 @@ function App() {
 
   function handleSortChange(e) {
     const sortType = e.target.value;
-    const sortQuery = collection.orderBy(sortType, 'asc');
+    const sortOrder = sortType === "creationdate" ? 'desc' : 'asc';
+    const sortQuery = collection.orderBy(sortType, sortOrder);
     setQuery(sortQuery);
   }
 
@@ -107,7 +110,7 @@ function App() {
             <select name="dropdown" className="mainDropdown" onChange={handleSortChange}>
               <option value="priority">Priority</option>
               <option value="todo">Name</option>
-              <option value="creation_date">Creation Date</option>
+              <option value="creationdate">Creation Date</option>
             </select>
         </div>
 

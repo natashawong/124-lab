@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import {filterType} from './Constants';
 
 export default function List(props) {
-    console.log("props.data" + JSON.stringify(props.data))
     const filteredData = props.filterType === filterType.hideCompleted ? props.data.filter(item => !item.completed) : props.data
     const [todo, setTodo] = useState({});
     const [checked, setChecked] = useState({});
