@@ -5,8 +5,7 @@ import { useCollection } from "react-firebase-hooks/firestore";
 import {generateUniqueID} from "web-vitals/dist/modules/lib/generateUniqueID";
 
 import './styles.css';
-import {filterType, modeType, priorityType} from './Constants';
-import { Timestamp } from '@firebase/firestore';
+import {filterType, modeType} from './Constants';
 
 const firebaseConfig = {
   apiKey: "AIzaSyATi5uqr6dkf4iTvqfPHndGwtHXz0O6O-s",
