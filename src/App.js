@@ -32,8 +32,6 @@ function App() {
   const [mode, setMode] = useState(modeType.base);
   const [atLeastOneSelected, setAtLeastOneSelected ] = useState(false);
 
-  console.log("filter: " + filter);
-
   const [value, error, loading] = useCollection(query);
 
   useEffect(() => {
@@ -159,8 +157,6 @@ function App() {
         mode={mode}
         lastId={lastId}
       />
-
-      {console.log(todoListData.filter(i => i.completed).length > 0)}
 
       <div className="footer">
           {todoListData.filter(i => i.completed).length > 0 && showHideButtons()}
