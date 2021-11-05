@@ -1,6 +1,8 @@
 .container {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
 }
 
 html {
@@ -168,19 +170,26 @@ body {
     display: flex;
     flex-direction: row;
     color: green;
+    justify-content: center;
+    align-items: center;
+}
+
+.todoTextInput {
+    margin: 0px 10px 0px 10px !important;
 }
 
 .listDropdown {
-    height: 30px;
-    width: 50px;
+    height: 33px;
+    width: 68px;
 }
 
 [type="checkbox"] {
     vertical-align: middle;
-    margin: 15px 15px 5px 15px;
+    margin: 15px 15px 15px 15px;
     width: 10px;
     height: 10px;
 }
+
 .regular-checkbox {
     -webkit-appearance: none;
     background-color: #b5838d;

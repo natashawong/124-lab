@@ -56,7 +56,7 @@ function App() {
   }
 
   function editTodo(newTodo, id) {
-    // Edits an existing Todo
+    // edits an existing Todo
     let todoObj = {'id': id, 'todo': newTodo}
     collection.doc(id).update(todoObj);
   }
@@ -66,6 +66,13 @@ function App() {
     let todoObj = {'id': id, 'completed': isCompleted}
     collection.doc(id).update(todoObj);
   }
+
+  function setPriorityLevel(priorityLevel, id) {
+    // changes the priority level
+    let todoObj = {'id': id, 'priority': priorityLevel}
+    collection.doc(id).update(todoObj);
+  }
+
 
   function doneClicked() {
     if (todoListData.length > 0 && todoListData[todoListData.length-1].todo === "") {removeTodo(lastId)}
@@ -130,6 +137,9 @@ function App() {
         }}
         onEditData={(newTodo, index) => {
           editTodo(newTodo, index);
+        }}
+        onChangePriority={(newTodo, index) => {
+          setPriorityLevel(newTodo, index);
         }}
         mode={mode}
         lastId={lastId}
