@@ -13,19 +13,15 @@ When we were considering alternate designs, we thought most about where to allow
 
 The factors that led to our ultimate decision was what would fit best onto a Motorola G4 screen. Hence, going with the dropdown would best allow for ease of fitting the select information onto the screen. 
 
-## User Testing [TODO: FIX]
+## User Testing
 
-We let our users test our inital application in-person. Their comments have been reflected above. After redesigning, re-tested the application with the same people. Since they've already seen the application they already know how the application works. We sent our users our github page for them to test. The screenshots below show their responses to the page.
+We had two users test our third iteration of our app: one who had tested the second version and another who has yet to try our app before.
 
 ### User testing 1
 
-![usertest1](images/usertest1.png)
+![usertesting](images/usertest_3.png)
 
-### User testing 2
-
-![usertest2](images/usertest2.png)
-
-For future labs, we want to test different people. People who have not seen the application before but also the same people who have seen this application to get more feedback. We will want to try to have someone in our class test the our application to get a developers perspective, since developers are also users.
+As we can see from the texts above, the changes were well recieved. Having them test together and interact with each other also highlighted parts of the app that really stood out.
 
 ## Final Design
 Note: previous functionality such as editing, deleting, adding todos are in `design-lab2.md` and is excluded from here to avoid repetition.
