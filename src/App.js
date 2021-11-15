@@ -104,9 +104,9 @@ function App() {
     return (
         <>
         {filter === filterType.hideCompleted ?
-        <button className="button showCompleted" onClick={() => setFilterType(filterType.showAll)}>Show All</button> :
-        <button className="button showCompleted" onClick={() => setFilterType(filterType.hideCompleted)}>Hide Completed</button>}
-        <button className="button deleteCompleted" onClick={deleteSelected}>Delete Completed</button> 
+        <button aria-label="Show all items" className="button showCompleted" onClick={() => setFilterType(filterType.showAll)}>Show All</button> :
+        <button aria-label="Hide completed items" className="button showCompleted" onClick={() => setFilterType(filterType.hideCompleted)}>Hide Completed</button>}
+        <button aria-label="Delete completed items" className="button deleteCompleted" onClick={deleteSelected}>Delete Completed</button> 
         </>
     )
   }
@@ -116,27 +116,28 @@ function App() {
     {query.loading && <h1>Loading</h1>}
     {todoListData && <>
       <div className="buttons">
-        <div>
+        <div className="mainDropdownContainer">
             <select name="dropdown" className="mainDropdown" onChange={handleSortChange}>
-              <option value="priority">Priority</option>
-              <option value="todo">Name</option>
-              <option value="creationdate">Creation Date</option>
+              <option aria-label="Sort by priority" value="priority">Sort by priority</option>
+              <option aria-label="Sort by name" value="todo">Sort by name</option>
+              <option aria-label="Sort by creation date" value="creationdate">Sort by creation date</option>
             </select>
         </div>
 
-        <div>
+        <div className="controlButtonContainer">
           {(mode === modeType.add || mode === modeType.edit) ? 
-                (<button className="button doneButton" onClick={doneClicked}>Done</button>)
+                (<button aria-label="Finish editing" className="button doneButton" onClick={doneClicked}>Done</button>)
               :
               (
                 <>
-                <button className="button editButton" onClick={editClicked}>Edit</button>
-                <button className="button plusButton" onClick={plusClicked}>+</button> 
+                <button aria-label="Edit" className="button editButton" onClick={editClicked}>Edit</button>
+                <button aria-label="Add a new todo" className="button plusButton" onClick={plusClicked}>+</button> 
                 </>
               )
           }
+        </div>
       </div>
-      </div>
+
       <div className="body-container">
           <div className="title">
               <h1 className="underline">To-do list</h1>
