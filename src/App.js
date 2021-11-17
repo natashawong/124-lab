@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import List from './List';
+import Tabs from './components/Tabs';
 import firebase from "firebase/compat";
 import { useCollection } from "react-firebase-hooks/firestore";
 import {generateUniqueID} from "web-vitals/dist/modules/lib/generateUniqueID";
@@ -100,6 +101,10 @@ function App() {
     setQuery(sortQuery);
   }
 
+  function addNewList() {
+    
+  }
+
   function showHideButtons() {
     return (
         <>
@@ -142,6 +147,7 @@ function App() {
               <h1 className="underline">To-do list</h1>
           </div>
       </div>
+      <Tabs title={test} selectedTab={true}  />
       <List
         data={todoListData} 
         filterType={filter}
