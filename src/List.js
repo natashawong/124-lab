@@ -34,18 +34,26 @@ export default function List(props) {
             {filteredData.map((item, i) => (
                 <div className="container">
                     <div className = "input" key={i}>
-                    <input type="checkbox" id={item.id} name={i} disabled={props.mode === "EDIT"} checked={item.completed} onChange={handleChange(item.id)} class='regular-checkbox'/>
-                        {props.mode === "EDIT" ? 
-                            <input type='text' id={item.id} name={i} value={item.todo} onChange={onEdit(item.id)} className="todoTextInput"/> :
-                        (props.mode === "ADD" && item.id === props.lastId) ?
-                            <input type='text' id={item.id} name={i} value={item.todo} onChange={onEdit(item.id)} className="todoTextInput"/> :
-                            <input type='text' id={item.id} name={i} value={item.todo} readOnly className="todoTextInput" style={{outline: "none"}}/>
-                        }   
-                    <select name="listDropdown"className="listDropdown" onChange={handlePriorityChange(item.id)}>
-                        <option value="1" selected={item.priority === "1"}>High</option>
-                        <option value="2" selected={item.priority === "2"}>Medium</option>
-                        <option value="3" selected={item.priority === "3"}>Low</option>
-                    </select>
+                        <div className="checkboxAndInputContainer">
+                            {/* checkbox */}
+                            <input type="checkbox" id={item.id} name={i} disabled={props.mode === "EDIT"} checked={item.completed} onChange={handleChange(item.id)} class='regular-checkbox'/>
+
+                            {/* text input/todo itself */}
+                            {props.mode === "EDIT" ? 
+                                <input type='text' id={item.id} name={i} value={item.todo} onChange={onEdit(item.id)} className="todoTextInput"/> :
+                            (props.mode === "ADD" && item.id === props.lastId) ?
+                                <input type='text' id={item.id} name={i} value={item.todo} onChange={onEdit(item.id)} className="todoTextInput"/> :
+                                <input type='text' id={item.id} name={i} value={item.todo} readOnly className="todoTextInput" style={{outline: "none"}}/>
+                            }   
+                        </div>
+
+                        {/* list dropdown */}
+                        <select name="listDropdown"className="listDropdown" onChange={handlePriorityChange(item.id)}>
+                            <option aria-label="high priority" value="1" selected={item.priority === "1"}>High</option>
+                            <option aria-label="medium priority" value="2" selected={item.priority === "2"}>Medium</option>
+                            <option aria-label="low priority" value="3" selected={item.priority === "3"}>Low</option>
+                        </select>
+
                     </div>
                 </div>
             ))}

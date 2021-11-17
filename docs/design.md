@@ -1,21 +1,18 @@
-# Lab 3 Design Document
+# Lab 4 Design Document
 
 ## Design Decisions
-### Lab 3 Redesign
+### Lab 4 Redesign
 
-For lab 3, we implemented a new priority setting function. This shows up in two places: the top left where a user is able to sort the todos by priority, creation date, or name, and beside each todo where there is a dropdown select providing functionality where a user can set the priority of a todo to "High", "Low", or "Medium".
-
-Improvements from lab 2 include moving the "Hide Complete" and "Delete Completed" buttons out of the "Edit" mode, such that a user can interact with them at any time and minor UI improvements to the todo alignments and checkboxes to give them an appearance more in line with the rest of our fun UI.
+- Changed colour slightly to make sure contrast was high enough
+- Added aria labels to all buttons
+- Add "Sort by" text in front of the sorting options to contextualize the dropdown
+- For bigger screens, no need to change the design. For smaller screens, shift the UI components to be organized by columns instead of rows
 
 ### Alternate Designs
 
-When we were considering alternate designs, we thought most about where to allow the user to set the prioirity. Most notably, we considered using a three button approach (having three buttons "High", "Low", and "Medium" with a bolder border or colour difference to indicate which is selected), a slider approach, and our current dropdown approach.
-
-The factors that led to our ultimate decision was what would fit best onto a Motorola G4 screen. Hence, going with the dropdown would best allow for ease of fitting the select information onto the screen. 
 
 ## User Testing
 
-We had two users test our third iteration of our app: one who had tested the second version and another who has yet to try our app before.
 
 ### User testing 1
 
@@ -57,8 +54,6 @@ Note: previous functionality such as editing, deleting, adding todos are in `des
 ## Reflection
 ### Challenges
 
-The biggest challenge for this lab was working with hooks and making sure that the state of our app was changing to initiate server side Firebase changes as well. In particular, we struggled with making sure our code followed the Rules-of-Hooks. Our solution to this was learning how to appropriately use state and useEffect to its best capabilities to make sure that our app would update accoridngly.
 
 ### Successes
 
-On the success side, we have a pleasant experience working with Firebase. It was not difficult and easy to ramp-up on. Additionally, learning how to read the documentation of this tool was rather intuitive and examples were clear and easy to follow.
