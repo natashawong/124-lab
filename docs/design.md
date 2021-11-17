@@ -26,9 +26,7 @@ We played around with a few minor different UI designs outlined below:
 
 ### User testing 1
 
-![usertesting](images/usertest_3.png)
 
-As we can see from the texts above, the changes were well recieved. Having them test together and interact with each other also highlighted parts of the app that really stood out.
 
 ## Final Design
 Note: previous functionality such as editing, deleting, adding todos are in `design-lab2.md` and is excluded from here to avoid repetition.
@@ -44,8 +42,13 @@ Note: previous functionality such as editing, deleting, adding todos are in `des
 5. Multiple lists (2)
 
 ## Reflection
+
+It was nice to apply the acessibility changes to our app. I think it's an incredibly important skill and piece of knowledge to apply whenever we are designing and building something. We also enjoyed implementing the multiple lists functionality. Despite some challenges, having it come together at the end turned a simple todo app into something much more complex and functional.
+
 ### Challenges
 
+It was difficult figuring out how to refactor our current code to make implementing multiple lists easier, as well as figuring out how to create the tab system itself. We found ourselves having to look at many different implementations of tabs online and pick and choose aspects that worked for our app design.
 
 ### Successes
 
+Making sure our app was accessible was most important to us and it was very nice seeing it come together at the end.
