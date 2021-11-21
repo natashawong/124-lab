@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import List from './List';
 import Tabs from './components/Tabs';
+import Tab from "./components/Tab"
 import firebase from "firebase/compat";
 import { useCollection } from "react-firebase-hooks/firestore";
 import {generateUniqueID} from "web-vitals/dist/modules/lib/generateUniqueID";
@@ -24,8 +25,9 @@ const db = firebase.firestore();
 
 function App() {
   const collection = db.collection('natasha-bettina-124');
-
+  // const tab_label = db.collection('natasha-bettina-124-tab-labels');
   const [query, setQuery] = useState(collection);
+  // const [query_tab, setQueryTab] = useState(tab_label);
 
   const [todoListData, setTodoListData] = useState([]);
   const [lastId, setLastId] = useState("");
@@ -34,6 +36,7 @@ function App() {
   const [atLeastOneSelected, setAtLeastOneSelected ] = useState(false);
 
   const [value, error, loading] = useCollection(query);
+  // const [value_tab, error_tab, loading_tab] = useCollection(query_tab);
 
   useEffect(() => {
     let data = [];
@@ -44,6 +47,12 @@ function App() {
     }
   }, [value])
 
+  // let tab_data = [];
+  //   if (value_tab) {
+  //     tab_data = value.docs.map((doc) => {
+  //          return {...doc.data()}})
+  //   }
+ 
   function plusClicked() {
     // Adds an empty Todo
     const newId = generateUniqueID();
@@ -102,7 +111,7 @@ function App() {
   }
 
   function addNewList() {
-    
+
   }
 
   function showHideButtons() {
@@ -148,7 +157,12 @@ function App() {
               <h1 className="underline">To-do list</h1>
           </div>
       </div>
-      <Tabs title={test} selectedTab={true}  />
+      <Tabs>
+        {/* <Tab title="Lemon">Lemon is yellow</Tab>
+        <Tab title="Strawberry">Strawberry is red</Tab> */}
+        <div title="Pear">Pear is green</div>
+        <div title="+"></div>
+      </Tabs>
       <List
         data={todoListData} 
         filterType={filter}

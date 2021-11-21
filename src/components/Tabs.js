@@ -3,20 +3,22 @@ import TabTitle from "./TabTitle"
 import { useState } from "react"
 
 const Tabs = ({ children }) => {
-    const [selectedTab, setSelectedTab] = useState(0)
+  const [selectedTab, setSelectedTab] = useState(0) 
 
+  
     return (
       <div>
-        <ul>
+        <div className="tab-list">
           {children.map((item, index) => (
             <TabTitle
               key={index}
               title={item.props.title}
               index={index}
               setSelectedTab={setSelectedTab}
+              selectedTab={selectedTab}
             />
           ))}
-        </ul>
+        </div>
         {children[selectedTab]}
       </div>
     )
