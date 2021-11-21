@@ -16,9 +16,9 @@ const TabTitle = ({ title, setSelectedTab, selectedTab, index }) => {
     }
 
       return (
-        <div>
+        <div className = "tabs">
           <label>
-          <input type='text' id={index} name={index} value={title} onClick={onClick} className={className}/>
+          <input type='text' id={index} name={index} value={title} onClick={onClick} readOnly className={className} style={{outline: "none"}}/>
           {/* <input type='text' className={className} onClick={onClick}>{title}</input> */}
           </label>
         </div>

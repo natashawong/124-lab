@@ -31,6 +31,7 @@ body {
     padding: 0.5rem 0.75rem;
     border: solid 0.5px black;
     border-bottom: 0px;
+    width: 30px;
 }
 
 .tab-list-active {
@@ -204,7 +205,7 @@ body {
     align-items: left;
 }
 
-.input {
+.list {
     display: flex;
     flex-direction: row;
     justify-content: center;
@@ -218,7 +219,7 @@ body {
 }
 
 @media screen and (max-width: 300px) {
-    .input {
+    .checkboxAndInputContainer {
         flex-direction: column;
         align-items: flex-end;
     }
@@ -226,6 +227,13 @@ body {
 
 .todoTextInput {
     margin: 0px 10px 0px 10px !important;
+    padding:10px;
+    border:0;
+    margin:10px 0;
+    vertical-align: middle;
+    margin: 15px 15px 5px 15px;
+    background-color: #e5989b;
+    height: 12px;
 }
 
 .listDropdown {
@@ -276,13 +284,3 @@ body {
 	left: 3px;
 	color: #000000;
 }
-
-[type=text] {
-    padding:10px;
-    border:0;
-    margin:10px 0;
-    vertical-align: middle;
-    margin: 15px 15px 5px 15px;
-    background-color: #e5989b;
-    height: 12px;
-  }

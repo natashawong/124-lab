@@ -4,7 +4,7 @@ import { useState } from "react"
 
 const Tabs = ({ children }) => {
   const [selectedTab, setSelectedTab] = useState(0) 
-
+  console.log(children)
   
     return (
       <div>

@@ -30,28 +30,22 @@ function App() {
   // const [query_tab, setQueryTab] = useState(tab_label);
 
   const [todoListData, setTodoListData] = useState([]);
+  const [todoListTabs, setTodoListTabs] = useState([]);
   const [lastId, setLastId] = useState("");
   const [filter, setFilterType] = useState(filterType.showAll);
   const [mode, setMode] = useState(modeType.base);
   const [atLeastOneSelected, setAtLeastOneSelected ] = useState(false);
 
-  const [value, error, loading] = useCollection(query);
-  // const [value_tab, error_tab, loading_tab] = useCollection(query_tab);
+  // const [value, error, loading] = useCollection(query);
 
-  useEffect(() => {
-    let data = [];
-    if (value) {
-      data = value.docs.map((doc) => {
-           return {...doc.data()}});
-      setTodoListData(data);
-    }
-  }, [value])
-
-  // let tab_data = [];
-  //   if (value_tab) {
-  //     tab_data = value.docs.map((doc) => {
-  //          return {...doc.data()}})
+  // useEffect(() => {
+  //   let data = [];
+  //   if (value) {
+  //     data = value.docs.map((doc) => {
+  //          return {...doc.data()}});
+  //     setTodoListData(data);
   //   }
+  // }, [value])
  
   function plusClicked() {
     // Adds an empty Todo
@@ -61,6 +55,11 @@ function App() {
     setLastId(newId);
     setMode(modeType.add);
   }
+
+  // function plusTabClicked() {
+  //   const newId = generateUniqueID();
+  //   collection.doc(newID).set({id: newId, title: "" ,collection: ""})
+  // }
   
   function removeTodo(id) {
     collection.doc(id).delete();
@@ -108,10 +107,6 @@ function App() {
     const sortOrder = sortType === "creationdate" ? 'desc' : 'asc';
     const sortQuery = collection.orderBy(sortType, sortOrder);
     setQuery(sortQuery);
-  }
-
-  function addNewList() {
-
   }
 
   function showHideButtons() {
@@ -164,7 +159,7 @@ function App() {
         <div title="+"></div>
       </Tabs>
       <List
-        data={todoListData} 
+        collection={collection}
         filterType={filter}
         onSetData={(isComplete, index) => {
           setCompleted(isComplete, index)

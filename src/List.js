@@ -1,11 +1,27 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {filterType} from './Constants';
+import { useCollection } from "react-firebase-hooks/firestore";
+import {generateUniqueID} from "web-vitals/dist/modules/lib/generateUniqueID";
 
 export default function List(props) {
-    const filteredData = props.filterType === filterType.hideCompleted ? props.data.filter(item => !item.completed) : props.data
+    
+    const [todoListData, setTodoListData] = useState([]);
+    const [query, setQuery] = useState(props.collection);
+    const [value, error, loading] = useCollection(query);
+    useEffect(() => {
+        let data = [];
+        if (value) {
+          data = value.docs.map((doc) => {
+               return {...doc.data()}});
+          setTodoListData(data);
+        }
+      }, [value])
+
+    const filteredData = props.filterType === filterType.hideCompleted ? todoListData.filter(item => !item.completed) : todoListData
     const [todo, setTodo] = useState({});
     const [checked, setChecked] = useState({});
     const [priorityLevel, setPriorityLevel] = useState({});
+    
     
     function handleChange(index) {
         return (e) => {
@@ -34,6 +50,7 @@ export default function List(props) {
             {filteredData.map((item, i) => (
                 <div className="container">
                     <div className = "input" key={i}>
+                        <div className= "list">
                         <div className="checkboxAndInputContainer">
                             {/* checkbox */}
                             <input type="checkbox" id={item.id} name={i} disabled={props.mode === "EDIT"} checked={item.completed} onChange={handleChange(item.id)} class='regular-checkbox'/>
@@ -53,6 +70,7 @@ export default function List(props) {
                             <option aria-label="medium priority" value="2" selected={item.priority === "2"}>Medium</option>
                             <option aria-label="low priority" value="3" selected={item.priority === "3"}>Low</option>
                         </select>
+                        </div>
 
                     </div>
                 </div>
