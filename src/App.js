@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import List from './List';
 import Tabs from './components/Tabs';
-import Tab from "./components/Tab"
 import firebase from "firebase/compat";
 import { useCollection } from "react-firebase-hooks/firestore";
 import {generateUniqueID} from "web-vitals/dist/modules/lib/generateUniqueID";
