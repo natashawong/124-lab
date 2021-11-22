@@ -41,20 +41,11 @@ function App() {
       data = value.docs.map((doc) => {
             return {...doc.data()}});
       setTodoListData(data);
+      if (currList === "") {
+        setCurrList(data[0].list);
+      }
     }
-  }, [value]);
-
-  useEffect(() => {
-    // Unfortunate but stop gap method to set the current list to the first list, without it re-rendering each time data is updated.
-    // Note: lack of dependencies so as to prevent this function from running more than once.
-    let data = [];
-    if (value) {
-      data = value.docs.map((doc) => {
-            return {...doc.data()}});
-      setTodoListData(data);
-      setCurrList(data[0].list);
-    }
-  }, []);
+  }, [currList, value]);
 
   function plusClicked() {
     // Adds an empty Todo
@@ -94,6 +85,13 @@ function App() {
     // changes the priority level
     let todoObj = {'id': id, 'priority': priorityLevel}
     collection.doc(id).update(todoObj);
+  }
+
+  function editTabTitle(tabTitle, id) {
+      // changes the list title
+      let todoObj = {'id': id, 'list': tabTitle}
+      collection.doc(id).update(todoObj);
+      setCurrList(tabTitle);
   }
 
   function doneClicked() {
@@ -161,6 +159,7 @@ function App() {
         currTab={currList}
         onNewTab={newList}
         onSelectTab={selectedList => setCurrList(selectedList)}
+        onEditTabTitle={(tabTitle, index) => editTabTitle(tabTitle, index)}
         mode={mode}
       />
 

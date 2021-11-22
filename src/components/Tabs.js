@@ -12,8 +12,10 @@ export default function Tabs(props) {
             return (
               <div>
                 <TabTitle
+                  onEditTabTitle={(tabTitle, index) => props.onEditTabTitle(tabTitle, index)}
                   onSelectTab={selectedTab => props.onSelectTab(selectedTab)}
                   key={i} 
+                  index={tab.id}
                   title={tab.list}
                   selectedTab={props.currTab}
                   mode={props.mode}
