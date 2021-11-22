@@ -3,6 +3,7 @@ import TabTitle from "./TabTitle";
 
 export default function Tabs(props) {
   const preventRepeats = new Set();
+  console.log(props.data)
   return (
     <div>
       <div className="tab-list">
