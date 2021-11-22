@@ -16,6 +16,17 @@ body {
     
 }
 
+.invisibleButton {
+    outline: "none";
+    background-color: "transparent";
+    border: "none";
+    background-repeat: "no-repeat";
+    overflow: "hidden";
+    cursor: "pointer";
+    margin: 0;
+    padding: 0;
+}
+
 .tab-list {  
     border-bottom: 1px solid #ccc;
     padding-left: 0;
@@ -31,7 +42,8 @@ body {
     padding: 0.5rem 0.75rem;
     border: solid 0.5px black;
     border-bottom: 0px;
-    width: 40px;
+    width: 50px;
+    outline: none;
 }
 
 .tab-list-active {
@@ -40,15 +52,19 @@ body {
     border-width: 1px 1px 0 1px;
 }
 
+.tabs input[type="text"][disabled] {
+    color: black;
+ }
+
 .plus-tab{
     background-color: #e5989b;
     display: inline-block;
     list-style: none;
     margin-bottom: -1px;
-    padding: 0.5rem 0.75rem;
     border: solid 0.5px black;
     border-bottom: 0px;
-    width: 40px;
+    width: 30px;
+    border-top-right-radius: 5px;
 }
 .plus-tab-active {
     background-color: white;
@@ -192,7 +208,7 @@ body {
     line-height:1.1em;
     font-size: small;
     border-radius: 5px;
-    margin-right: 10px;
+    margin-right: 5px;
 }
 
 .showCompleted {
@@ -203,7 +219,7 @@ body {
     line-height:1.1em;
     font-size: small;
     border-radius: 5px;
-    margin-right: 10px;
+    margin-right: 5px;
     margin-bottom: 15px;
 }
 
@@ -215,6 +231,7 @@ body {
     line-height:1.1em;
     font-size: small;
     border-radius: 5px;
+    margin-right: 5px;
 }
 
 .container {

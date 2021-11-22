@@ -13,9 +13,10 @@ export default function TabTitle(props) {
     }
 
     return (
-      <div className = "tabs">
-        <input type='text' id={props.key} name={props.key} value={props.title} onClick={updateSelectedTab} className={className}/>
-        {/* <input type='text' id={index} name={index} value={title} onClick={onClick} readOnly className={className} style={{outline: "none"}}/> */}
+      <div className="tabs">
+        <button onClick={updateSelectedTab} className="invisibleButton">
+          <input type='text' id={props.key} name={props.key} value={props.title} className={className} disabled={props.mode !== "EDIT"}/>
+        </button>
       </div>
     )
 }

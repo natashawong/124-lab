@@ -34,7 +34,14 @@ export default function List(props) {
     function deleteAllCompleted() {
         const toDelete = filteredData.filter(todo => todo.completed);
         for (let i = 0; i < toDelete.length; i++) {
-            props.onRemoveTodo(toDelete.id);
+            console.log(toDelete[i].id);
+            props.onRemoveTodo(toDelete[i].id);
+        }
+    }
+
+    function deleteList() {
+        for (let i = 0; i < filteredData.length; i++) {
+            props.onRemoveTodo(filteredData[i].id);
         }
     }
 
@@ -74,7 +81,11 @@ export default function List(props) {
                     <div>
                     {props.onShowAll}
                     <button aria-label="Delete completed items" className="button deleteCompleted" onClick={deleteAllCompleted}>Delete Completed</button> 
-                    </div>}
+                    </div>
+                }
+                <div>
+                    <button aria-label="Delete entire list" className="button deleteCompleted" onClick={deleteList}>Delete List</button> 
+                </div>
             </div>
         </div>
     )

@@ -16,13 +16,14 @@ export default function Tabs(props) {
                   key={i} 
                   title={tab.list}
                   selectedTab={props.currTab}
+                  mode={props.mode}
                 />
               </div>
             )}
           preventRepeats.add(tab.list);
           })}
         {/* PLUS BUTTON - Add a new tab/list */}
-        <button aria-label="Add a new tab" className="plusName" onClick={props.onNewTab}>+</button>
+        <button aria-label="Add a new tab" className="plus-tab" onClick={props.onNewTab}>+</button>
       </div>
     </div>
     )

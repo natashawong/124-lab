@@ -33,6 +33,7 @@ function App() {
   const [mode, setMode] = useState(modeType.base);
 
   const [value, error, loading] = useCollection(collection);
+  const [currList, setCurrList] = useState("");
 
   useEffect(() => {
     let data = [];
@@ -41,9 +42,19 @@ function App() {
             return {...doc.data()}});
       setTodoListData(data);
     }
-  }, [value])
+  }, [value]);
 
-  const [currList, setCurrList] = useState("list1");
+  useEffect(() => {
+    // Unfortunate but stop gap method to set the current list to the first list, without it re-rendering each time data is updated.
+    // Note: lack of dependencies so as to prevent this function from running more than once.
+    let data = [];
+    if (value) {
+      data = value.docs.map((doc) => {
+            return {...doc.data()}});
+      setTodoListData(data);
+      setCurrList(data[0].list);
+    }
+  }, []);
 
   function plusClicked() {
     // Adds an empty Todo
@@ -55,10 +66,10 @@ function App() {
   }
 
   function newList() {
-    // Creates a new list called "New List" with an empty todo
+    // Creates a new list called "List<some combination of unique ID numbers>" with a "First Todo"
     const newId = generateUniqueID();
     let currDate = firebase.firestore.Timestamp.now();
-    collection.doc(newId).set({ id: newId, todo: "First Todo", completed: false, priority: 2, creationdate: currDate, list: "New List"});
+    collection.doc(newId).set({ id: newId, todo: "First Todo", completed: false, priority: 2, creationdate: currDate, list: "List" + newId.slice(20, 25)});
     setLastId(newId);
     setMode(modeType.add);
   }
@@ -150,6 +161,7 @@ function App() {
         currTab={currList}
         onNewTab={newList}
         onSelectTab={selectedList => setCurrList(selectedList)}
+        mode={mode}
       />
 
       <List
