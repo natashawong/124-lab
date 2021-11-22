@@ -1,27 +1,13 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import {filterType} from './Constants';
-import { useCollection } from "react-firebase-hooks/firestore";
-import {generateUniqueID} from "web-vitals/dist/modules/lib/generateUniqueID";
 
 export default function List(props) {
-    
-    const [todoListData, setTodoListData] = useState([]);
-    const [query, setQuery] = useState(props.collection);
-    const [value, error, loading] = useCollection(query);
-    useEffect(() => {
-        let data = [];
-        if (value) {
-          data = value.docs.map((doc) => {
-               return {...doc.data()}});
-          setTodoListData(data);
-        }
-      }, [value])
-    
-    const filteredData = props.filterType === filterType.hideCompleted ? todoListData.filter(item => !item.completed) : todoListData
+    const filterDataByList = props.data.filter(item => item.list === props.currList);
+    const filteredData = props.filterType === filterType.hideCompleted ? filterDataByList.filter(item => !item.completed) : filterDataByList
+
     const [todo, setTodo] = useState({});
     const [checked, setChecked] = useState({});
     const [priorityLevel, setPriorityLevel] = useState({});
-    
     
     function handleChange(index) {
         return (e) => {
@@ -44,30 +30,19 @@ export default function List(props) {
             props.onChangePriority(e.target.value, index);
         }
     }
-// 
-    // function doneClicked() {
-    //     if (todoListData.length > 0 && todoListData[todoListData.length-1].todo === "") {removeTodo(lastId)}
-    //     setMode(modeType.base);
-    //   }
-    
-    // function editClicked() {
-    // todoListData.map((item, i) => {
-    //     if (item.completed) {setAtLeastOneSelected(true)}
-    // })
-    // setMode(modeType.edit);
-    // }
 
-    function deleteSelected() {
-        todoListData.map((item, i) => {
-          if (item.completed) {props.onRemoveTodo(item.id)}
-        })
-      }
+    function deleteAllCompleted() {
+        const toDelete = filteredData.filter(todo => todo.completed);
+        for (let i = 0; i < toDelete.length; i++) {
+            props.onRemoveTodo(toDelete.id);
+        }
+    }
 
     return(
         <div>
             {filteredData.map((item, i) => (
                 <div className="container">
-                    <div className = "input" key={i}>
+                    <div key={i}>
                         <div className= "list">
                         <div className="checkboxAndInputContainer">
                             {/* checkbox */}
@@ -93,11 +68,12 @@ export default function List(props) {
                     </div>
                 </div>
             ))}
+
             <div className="footer">
-                {todoListData.filter(i => i.completed).length > 0 && 
+                {filteredData.filter(i => i.completed).length > 0 && 
                     <div>
                     {props.onShowAll}
-                    <button aria-label="Delete completed items" className="button deleteCompleted" onClick={deleteSelected}>Delete Completed</button> 
+                    <button aria-label="Delete completed items" className="button deleteCompleted" onClick={deleteAllCompleted}>Delete Completed</button> 
                     </div>}
             </div>
         </div>

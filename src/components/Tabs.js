@@ -1,50 +1,29 @@
-import React, { ReactElement } from "react"
-import TabTitle from "./TabTitle"
-import { useState } from "react"
+import React from "react";
+import TabTitle from "./TabTitle";
 
-const Tabs = (props) => {
-
-  const [selectedTab, setSelectedTab] = useState(0) 
-  const [plusName, setPlusName] = useState("plus-tab")
-  const [plusButtonClicked, setPlusButtonClicked] = useState(0)
-  
-  function plusClicked() {
-    setPlusButtonClicked()
-    setSelectedTab();
-    props.onPlusClicked();
-    setPlusName("plus-tab-active");
-    
-    // TODO:
-    // add new todo from collection
-    
-    setPlusName("plus-tab")
-  }
-
-  if (selectedTab) {
-    props.tabs.map((item, index) => ()
-  } 
-
-    return (
-      <div>
-        <div className="tab-list">
-          {/* TABS */}
-          {props.tabs.map((item, index) => (
-            <div>
-            <TabTitle
-              key={index} 
-              title={item.title}
-              index={index}
-              setSelectedTab={setSelectedTab}
-              selectedTab={selectedTab}
-              plusButtonClicked={plusButtonClicked}
-            />
-          </div>
-          ))}
-          {/* PLUS BUTTON */}
-          <button aria-label="Add a new tab" className={plusName} onClick={plusClicked}>+</button> 
-       </div>
+export default function Tabs(props) {
+  const preventRepeats = new Set();
+  return (
+    <div>
+      <div className="tab-list">
+        {/* TABS */}
+        {props.data.map((tab, i) => {
+          if (!preventRepeats.has(tab.list)) {
+            return (
+              <div>
+                <TabTitle
+                  onSelectTab={selectedTab => props.onSelectTab(selectedTab)}
+                  key={i} 
+                  title={tab.list}
+                  selectedTab={props.currTab}
+                />
+              </div>
+            )}
+          preventRepeats.add(tab.list);
+          })}
+        {/* PLUS BUTTON - Add a new tab/list */}
+        <button aria-label="Add a new tab" className="plusName" onClick={props.onNewTab}>+</button>
       </div>
+    </div>
     )
 }
-
-export default Tabs

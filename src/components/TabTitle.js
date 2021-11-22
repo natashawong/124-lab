@@ -1,36 +1,21 @@
 
-import React from "react"
-import { useState } from "react"
-import { useCallback } from "react"
+import React from "react";
 
-const TabTitle = ({ title, setSelectedTab, selectedTab, plusButtonClicked, index }) => {
-
-    const onClick = useCallback(() => {
-        setSelectedTab(index)
-    }, [setSelectedTab, index])
-    
+export default function TabTitle(props) {
     let className = 'tab-list-item';
 
-    if (selectedTab === index) {
+    if (props.title === props.selectedTab) {
       className += ' tab-list-active';
     }
 
-    // function onEdit(index) {
-    //   return (e) => {
-    //       setTodo( prevState => ({...prevState, [e.target.name] : e.target.value}))
-    //       props.onEditData(e.target.value, index);
-    //   }
-    // }
+    function updateSelectedTab() {
+      props.onSelectTab(props.title);
+    }
 
-      return (
-        <div className = "tabs">
-          {plusButtonClicked ?
-          <input type='text' id={index} name={index} value={title} onClick={onClick} className={className}/>
-          :
-          <input type='text' id={index} name={index} value={title} onClick={onClick} readOnly className={className} style={{outline: "none"}}/>
-          }
-        </div>
-      )
+    return (
+      <div className = "tabs">
+        <input type='text' id={props.key} name={props.key} value={props.title} onClick={updateSelectedTab} className={className}/>
+        {/* <input type='text' id={index} name={index} value={title} onClick={onClick} readOnly className={className} style={{outline: "none"}}/> */}
+      </div>
+    )
 }
-
-export default TabTitle

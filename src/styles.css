@@ -218,13 +218,12 @@ body {
 }
 
 .container {
-    align-items: left;
+    display: flex;
 }
 
 .list {
     display: flex;
     flex-direction: row;
-    justify-content: center;
     align-items: center;
 }
 

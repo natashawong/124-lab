@@ -24,43 +24,43 @@ firebase.initializeApp(firebaseConfig);
 const db = firebase.firestore();
 
 function App() {
-  const [collectionName, setCollectionName] = useState('natasha-bettina-124')
-  const collection = db.collection(dbName);
-  const tabCollection = db.collection('natasha-bettina-124-tab-labels');
+  const collection = db.collection('todo_list');
   const [query, setQuery] = useState(collection);
-  const [query_tab, setQueryTab] = useState(tabCollection);
 
   const [todoListData, setTodoListData] = useState([]);
-  const [todoListTabs, setTodoListTabs] = useState([]);
   const [lastId, setLastId] = useState("");
   const [filter, setFilterType] = useState(filterType.showAll);
   const [mode, setMode] = useState(modeType.base);
-  const [atLeastOneSelected, setAtLeastOneSelected ] = useState(false);
 
-  const [value, error, loading] = useCollection(query_tab);
+  const [value, error, loading] = useCollection(collection);
 
   useEffect(() => {
     let data = [];
     if (value) {
       data = value.docs.map((doc) => {
-           return {...doc.data()}});
-      setTodoListTabs(data);
+            return {...doc.data()}});
+      setTodoListData(data);
     }
   }, [value])
 
-  
-   function plusClicked() {
+  const [currList, setCurrList] = useState("list1");
+
+  function plusClicked() {
     // Adds an empty Todo
     const newId = generateUniqueID();
     let currDate = firebase.firestore.Timestamp.now();
-    collection.doc(newId).set({ id: newId, todo: "", completed: false, priority: 2, creationdate: currDate});
+    collection.doc(newId).set({ id: newId, todo: "", completed: false, priority: 2, creationdate: currDate, list: currList});
     setLastId(newId);
     setMode(modeType.add);
   }
 
-  function plusTabClicked() {
+  function newList() {
+    // Creates a new list called "New List" with an empty todo
     const newId = generateUniqueID();
-    tabCollection.doc(newId).set({id: newId, title: "" ,collection: ""})
+    let currDate = firebase.firestore.Timestamp.now();
+    collection.doc(newId).set({ id: newId, todo: "First Todo", completed: false, priority: 2, creationdate: currDate, list: "New List"});
+    setLastId(newId);
+    setMode(modeType.add);
   }
   
   function removeTodo(id) {
@@ -85,25 +85,14 @@ function App() {
     collection.doc(id).update(todoObj);
   }
 
-  // TODO: 
-  // move these functions or figure out a way to get the todo list data length over from list
   function doneClicked() {
     if (todoListData.length > 0 && todoListData[todoListData.length-1].todo === "") {removeTodo(lastId)}
     setMode(modeType.base);
   }
 
   function editClicked() {
-    todoListData.map((item, i) => {
-      if (item.completed) {setAtLeastOneSelected(true)}
-    })
     setMode(modeType.edit);
   }
-
-  // function deleteSelected(personId) {
-  //   todoListData.map((item, i) => {
-  //     if (item.completed) {removeTodo(item.id)}
-  //   })
-  // }
 
   function handleSortChange(e) {
     const sortType = e.target.value;
@@ -122,10 +111,6 @@ function App() {
         </>
     )
   }
-
-  // function setCollection() {
-
-  // }
 
   return (
     <div>
@@ -159,14 +144,17 @@ function App() {
               <h1 className="underline">To-do list</h1>
           </div>
       </div>
+
       <Tabs
-        tabs={todoListTabs}
-        // tabs={[{id: 1, title: "todo1" ,collection: "todo1"}, {id: 2, title: "todo2" ,collection: "todo2"}]}
-        onPlusClicked={ () => plusTabClicked()}
-        collectionName={ (collectionName) => setCollectionName(collectionName) }
+        data={todoListData}
+        currTab={currList}
+        onNewTab={newList}
+        onSelectTab={selectedList => setCurrList(selectedList)}
       />
+
       <List
-        collection={collection}
+        data={todoListData}
+        currList={currList}
         filterType={filter}
         onSetData={(isComplete, index) => {
           setCompleted(isComplete, index)
