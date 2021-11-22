@@ -3,7 +3,7 @@ import React from "react"
 import { useState } from "react"
 import { useCallback } from "react"
 
-const TabTitle = ({ title, setSelectedTab, selectedTab, index }) => {
+const TabTitle = ({ title, setSelectedTab, selectedTab, plusButtonClicked, index }) => {
 
     const onClick = useCallback(() => {
         setSelectedTab(index)
@@ -15,12 +15,20 @@ const TabTitle = ({ title, setSelectedTab, selectedTab, index }) => {
       className += ' tab-list-active';
     }
 
+    // function onEdit(index) {
+    //   return (e) => {
+    //       setTodo( prevState => ({...prevState, [e.target.name] : e.target.value}))
+    //       props.onEditData(e.target.value, index);
+    //   }
+    // }
+
       return (
         <div className = "tabs">
-          <label>
+          {plusButtonClicked ?
+          <input type='text' id={index} name={index} value={title} onClick={onClick} className={className}/>
+          :
           <input type='text' id={index} name={index} value={title} onClick={onClick} readOnly className={className} style={{outline: "none"}}/>
-          {/* <input type='text' className={className} onClick={onClick}>{title}</input> */}
-          </label>
+          }
         </div>
       )
 }

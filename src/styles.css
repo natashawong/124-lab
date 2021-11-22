@@ -31,10 +31,26 @@ body {
     padding: 0.5rem 0.75rem;
     border: solid 0.5px black;
     border-bottom: 0px;
-    width: 30px;
+    width: 40px;
 }
 
 .tab-list-active {
+    background-color: white;
+    border: solid 0.5px black;
+    border-width: 1px 1px 0 1px;
+}
+
+.plus-tab{
+    background-color: #e5989b;
+    display: inline-block;
+    list-style: none;
+    margin-bottom: -1px;
+    padding: 0.5rem 0.75rem;
+    border: solid 0.5px black;
+    border-bottom: 0px;
+    width: 40px;
+}
+.plus-tab-active {
     background-color: white;
     border: solid 0.5px black;
     border-width: 1px 1px 0 1px;

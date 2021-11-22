@@ -16,7 +16,7 @@ export default function List(props) {
           setTodoListData(data);
         }
       }, [value])
-
+    
     const filteredData = props.filterType === filterType.hideCompleted ? todoListData.filter(item => !item.completed) : todoListData
     const [todo, setTodo] = useState({});
     const [checked, setChecked] = useState({});
@@ -44,6 +44,24 @@ export default function List(props) {
             props.onChangePriority(e.target.value, index);
         }
     }
+// 
+    // function doneClicked() {
+    //     if (todoListData.length > 0 && todoListData[todoListData.length-1].todo === "") {removeTodo(lastId)}
+    //     setMode(modeType.base);
+    //   }
+    
+    // function editClicked() {
+    // todoListData.map((item, i) => {
+    //     if (item.completed) {setAtLeastOneSelected(true)}
+    // })
+    // setMode(modeType.edit);
+    // }
+
+    function deleteSelected() {
+        todoListData.map((item, i) => {
+          if (item.completed) {props.onRemoveTodo(item.id)}
+        })
+      }
 
     return(
         <div>
@@ -75,6 +93,13 @@ export default function List(props) {
                     </div>
                 </div>
             ))}
+            <div className="footer">
+                {todoListData.filter(i => i.completed).length > 0 && 
+                    <div>
+                    {props.onShowAll}
+                    <button aria-label="Delete completed items" className="button deleteCompleted" onClick={deleteSelected}>Delete Completed</button> 
+                    </div>}
+            </div>
         </div>
     )
 }

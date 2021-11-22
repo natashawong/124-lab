@@ -24,10 +24,11 @@ firebase.initializeApp(firebaseConfig);
 const db = firebase.firestore();
 
 function App() {
-  const collection = db.collection('natasha-bettina-124');
-  // const tab_label = db.collection('natasha-bettina-124-tab-labels');
+  const [collectionName, setCollectionName] = useState('natasha-bettina-124')
+  const collection = db.collection(dbName);
+  const tabCollection = db.collection('natasha-bettina-124-tab-labels');
   const [query, setQuery] = useState(collection);
-  // const [query_tab, setQueryTab] = useState(tab_label);
+  const [query_tab, setQueryTab] = useState(tabCollection);
 
   const [todoListData, setTodoListData] = useState([]);
   const [todoListTabs, setTodoListTabs] = useState([]);
@@ -36,18 +37,19 @@ function App() {
   const [mode, setMode] = useState(modeType.base);
   const [atLeastOneSelected, setAtLeastOneSelected ] = useState(false);
 
-  // const [value, error, loading] = useCollection(query);
+  const [value, error, loading] = useCollection(query_tab);
 
-  // useEffect(() => {
-  //   let data = [];
-  //   if (value) {
-  //     data = value.docs.map((doc) => {
-  //          return {...doc.data()}});
-  //     setTodoListData(data);
-  //   }
-  // }, [value])
- 
-  function plusClicked() {
+  useEffect(() => {
+    let data = [];
+    if (value) {
+      data = value.docs.map((doc) => {
+           return {...doc.data()}});
+      setTodoListTabs(data);
+    }
+  }, [value])
+
+  
+   function plusClicked() {
     // Adds an empty Todo
     const newId = generateUniqueID();
     let currDate = firebase.firestore.Timestamp.now();
@@ -56,10 +58,10 @@ function App() {
     setMode(modeType.add);
   }
 
-  // function plusTabClicked() {
-  //   const newId = generateUniqueID();
-  //   collection.doc(newID).set({id: newId, title: "" ,collection: ""})
-  // }
+  function plusTabClicked() {
+    const newId = generateUniqueID();
+    tabCollection.doc(newId).set({id: newId, title: "" ,collection: ""})
+  }
   
   function removeTodo(id) {
     collection.doc(id).delete();
@@ -83,7 +85,8 @@ function App() {
     collection.doc(id).update(todoObj);
   }
 
-
+  // TODO: 
+  // move these functions or figure out a way to get the todo list data length over from list
   function doneClicked() {
     if (todoListData.length > 0 && todoListData[todoListData.length-1].todo === "") {removeTodo(lastId)}
     setMode(modeType.base);
@@ -96,11 +99,11 @@ function App() {
     setMode(modeType.edit);
   }
 
-  function deleteSelected(personId) {
-    todoListData.map((item, i) => {
-      if (item.completed) {removeTodo(item.id)}
-    })
-  }
+  // function deleteSelected(personId) {
+  //   todoListData.map((item, i) => {
+  //     if (item.completed) {removeTodo(item.id)}
+  //   })
+  // }
 
   function handleSortChange(e) {
     const sortType = e.target.value;
@@ -115,10 +118,14 @@ function App() {
         {filter === filterType.hideCompleted ?
         <button aria-label="Show all items" className="button showCompleted" onClick={() => setFilterType(filterType.showAll)}>Show All</button> :
         <button aria-label="Hide completed items" className="button showCompleted" onClick={() => setFilterType(filterType.hideCompleted)}>Hide Completed</button>}
-        <button aria-label="Delete completed items" className="button deleteCompleted" onClick={deleteSelected}>Delete Completed</button> 
+        {/* <button aria-label="Delete completed items" className="button deleteCompleted" onClick={deleteSelected}>Delete Completed</button>  */}
         </>
     )
   }
+
+  // function setCollection() {
+
+  // }
 
   return (
     <div>
@@ -152,12 +159,12 @@ function App() {
               <h1 className="underline">To-do list</h1>
           </div>
       </div>
-      <Tabs>
-        {/* <Tab title="Lemon">Lemon is yellow</Tab>
-        <Tab title="Strawberry">Strawberry is red</Tab> */}
-        <div title="Pear">Pear is green</div>
-        <div title="+"></div>
-      </Tabs>
+      <Tabs
+        tabs={todoListTabs}
+        // tabs={[{id: 1, title: "todo1" ,collection: "todo1"}, {id: 2, title: "todo2" ,collection: "todo2"}]}
+        onPlusClicked={ () => plusTabClicked()}
+        collectionName={ (collectionName) => setCollectionName(collectionName) }
+      />
       <List
         collection={collection}
         filterType={filter}
@@ -170,13 +177,13 @@ function App() {
         onChangePriority={(newTodo, index) => {
           setPriorityLevel(newTodo, index);
         }}
+        onShowAll={showHideButtons()}
+        onRemoveTodo={(id) => {
+          removeTodo(id)
+        }}
         mode={mode}
         lastId={lastId}
       />
-
-      <div className="footer">
-          {todoListData.filter(i => i.completed).length > 0 && showHideButtons()}
-      </div>
     </>
           }
     </div>

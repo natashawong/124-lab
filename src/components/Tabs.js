@@ -2,24 +2,47 @@ import React, { ReactElement } from "react"
 import TabTitle from "./TabTitle"
 import { useState } from "react"
 
-const Tabs = ({ children }) => {
+const Tabs = (props) => {
+
   const [selectedTab, setSelectedTab] = useState(0) 
-  console.log(children)
+  const [plusName, setPlusName] = useState("plus-tab")
+  const [plusButtonClicked, setPlusButtonClicked] = useState(0)
   
+  function plusClicked() {
+    setPlusButtonClicked()
+    setSelectedTab();
+    props.onPlusClicked();
+    setPlusName("plus-tab-active");
+    
+    // TODO:
+    // add new todo from collection
+    
+    setPlusName("plus-tab")
+  }
+
+  if (selectedTab) {
+    props.tabs.map((item, index) => ()
+  } 
+
     return (
       <div>
         <div className="tab-list">
-          {children.map((item, index) => (
+          {/* TABS */}
+          {props.tabs.map((item, index) => (
+            <div>
             <TabTitle
-              key={index}
-              title={item.props.title}
+              key={index} 
+              title={item.title}
               index={index}
               setSelectedTab={setSelectedTab}
               selectedTab={selectedTab}
+              plusButtonClicked={plusButtonClicked}
             />
+          </div>
           ))}
-        </div>
-        {children[selectedTab]}
+          {/* PLUS BUTTON */}
+          <button aria-label="Add a new tab" className={plusName} onClick={plusClicked}>+</button> 
+       </div>
       </div>
     )
 }
