@@ -9,7 +9,16 @@ export default function Tabs(props) {
       id: props.data[i].id,
     });
   }
-  const uniqueTabs = [...new Set(tabs)];
+
+  const preventRepeats = new Set();
+  const uniqueTabs = [];
+  for (let i = 0; i < tabs.length; i++) {
+    if (!preventRepeats.has(tabs[i].list)) {
+      uniqueTabs.push(tabs[i]);
+    }
+    preventRepeats.add(tabs[i].list);
+  }
+
   return (
     <div>
       <div className="tab-list">
