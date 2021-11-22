@@ -34,7 +34,6 @@ export default function List(props) {
     function deleteAllCompleted() {
         const toDelete = filteredData.filter(todo => todo.completed);
         for (let i = 0; i < toDelete.length; i++) {
-            console.log(toDelete[i].id);
             props.onRemoveTodo(toDelete[i].id);
         }
     }

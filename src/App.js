@@ -115,7 +115,6 @@ function App() {
         {filter === filterType.hideCompleted ?
         <button aria-label="Show all items" className="button showCompleted" onClick={() => setFilterType(filterType.showAll)}>Show All</button> :
         <button aria-label="Hide completed items" className="button showCompleted" onClick={() => setFilterType(filterType.hideCompleted)}>Hide Completed</button>}
-        {/* <button aria-label="Delete completed items" className="button deleteCompleted" onClick={deleteSelected}>Delete Completed</button>  */}
         </>
     )
   }
