@@ -129,7 +129,7 @@ function App() {
     {todoListData && <>
       <div className="buttons">
         <div className="mainDropdownContainer">
-            <select name="dropdown" className="mainDropdown" onChange={handleSortChange}>
+            <select name="dropdown" className="mainDropdown" onChange={handleSortChange} disabled={mode === modeType.edit}>
               <option aria-label="Sort by priority" value="priority">Sort by priority</option>
               <option aria-label="Sort by name" value="todo">Sort by name</option>
               <option aria-label="Sort by creation date" value="creationdate">Sort by creation date</option>
