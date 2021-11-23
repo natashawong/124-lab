@@ -32,39 +32,41 @@ As we can see from the texts above, the changes were well recieved. Having them 
 ## Final Design
 Note: previous functionality such as editing, deleting, adding todos are in `design-lab2.md` and `design-lab3.md`. To prevent repetition, we decided to only feature creating new tabs.
 
-1. Landing page (with tasks)
+1. Landing page (with tasks and one tab)
 
-![landing_page_tasks](images/one.png)
+![landing_page_tasks](images/first.png)
 
-2. Landing page (with no tasks)
+2. Landing page (with multiple tasks)
 
-![landing_page_no_tasks](images/two.png)
+![landing_page_no_tasks](images/second.png)
 
-3. Sorting all todos from the top left dropdown selector
+3. Adding a new tab by clicking the + button
 
-![sort_main](images/three.png)
+![sort_main](images/third.png)
 
-4. Changing the prioirty of a todo from the todo's dropdown selector
+4. Landing page of the new tab
 
-![set_priority](images/four.png)
+![set_priority](images/fourth.png)
 
-5. Adding a new task on default sets it to priority "High"
+5. Editing the new todo
 
-![new_task_high](images/five.png)
+![new_task_high](images/fifth.png)
 
-6. No todos are selected
+6. Editing the new tab label
 
-![none_selected](images/six.png)
+![none_selected](images/sixth.png)
 
-7. Some todos are selected
+7. Clicking on the another tab after creating a new tab
 
-![some_selected](images/seven.png)
+![some_selected](images/seventh.png)
 
 ## Reflection
 ### Challenges
 
-One of the biggest challenges for this lab was to figure out what type of data structure to use to create the tab list.
+One of the biggest challenges for this lab was to figure out what type of data structure to use to create the tab list. While we got it to work in the end, there were many problems that arised making different collections.
+
+Furthermore getting the tabs to work alongside firebase was tricky at first but once we decided no our data structure it was easy to distinguish
 
 ### Successes
 
-On the success side, we have a pleasant experience working with Firebase. It was not difficult and easy to ramp-up on. Additionally, learning how to read the documentation of this tool was rather intuitive and examples were clear and easy to follow.
+Our successes was implementing multiple lists. While we had problems refactoring at the start, the process was easy and it was nice how we were lead into creating multiple lists from the classes. Furthermore, creating a new design each time was fun to do especially figuring out ways to incorporate the new task.
