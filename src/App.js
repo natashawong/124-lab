@@ -4,6 +4,11 @@ import Tabs from './components/Tabs';
 import firebase from "firebase/compat";
 import { useCollection } from "react-firebase-hooks/firestore";
 import {generateUniqueID} from "web-vitals/dist/modules/lib/generateUniqueID";
+import {
+  useAuthState,
+  useCreateUserWithEmailAndPassword,
+  useSignInWithEmailAndPassword
+} from 'react-firebase-hooks/auth';
 
 import './styles.css';
 import {filterType, modeType} from './Constants';
@@ -34,6 +39,9 @@ function App() {
   const [value, error, loading] = useCollection(collection);
   const [currList, setCurrList] = useState("");
 
+  const auth = firebase.auth();
+  const googleProvider = new firebase.auth.GoogleAuthProvider();
+
   useEffect(() => {
     let data = [];
     if (value) {
@@ -45,6 +53,67 @@ function App() {
       }
     }
   }, [currList, value]);
+
+  /*
+  TODO:
+    - log in page
+    - sharing task lists..
+      - permissions of tasks
+  */
+
+  function verifyEmail() {
+    auth.currentUser.sendEmailVerification();
+  }
+
+  function SignIn() {
+    const [
+        signInWithEmailAndPassword,
+        userCredential, loading, error
+    ] = useSignInWithEmailAndPassword(auth);
+
+    if (userCredential) {
+        // Shouldn't happen because App should see that
+        // we are signed in.
+        return <div>Unexpectedly signed in already</div>
+    } else if (loading) {
+        return <p>Logging in…</p>
+    }
+    return <div>
+        {error && <p>"Error logging in: " {error.message}</p>}
+        <button onClick={() =>
+            signInWithEmailAndPassword(FAKE_EMAIL, FAKE_PASSWORD)}>Login with test user Email/PW
+        </button>
+        <button onClick={() =>
+            auth.signInWithPopup(googleProvider)}>Login with Google
+        </button>
+    </div>
+  }
+
+  const FAKE_EMAIL = 'foo@bar.com';
+  const FAKE_PASSWORD = 'xyzzyxx';
+
+  function SignUp() {
+      const [
+          createUserWithEmailAndPassword,
+          userCredential, loading, error
+      ] = useCreateUserWithEmailAndPassword(auth);
+
+      if (userCredential) {
+          // Shouldn't happen because App should see that
+          // we are signed in.
+          return <div>Unexpectedly signed in already</div>
+      } else if (loading) {
+          return <p>Signing up…</p>
+      }
+      return <div>
+          {error && <p>"Error signing up: " {error.message}</p>}
+          <button onClick={() =>
+              createUserWithEmailAndPassword(FAKE_EMAIL, FAKE_PASSWORD)}>
+              Create test user
+          </button>
+
+      </div>
+  }
 
   function plusClicked() {
     // Adds an empty Todo
