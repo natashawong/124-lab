@@ -59,6 +59,8 @@ function App() {
     - log in page
     - sharing task lists..
       - permissions of tasks
+    - log out button
+    - User icon
   */
 
   function verifyEmail() {
