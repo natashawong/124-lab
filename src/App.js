@@ -9,6 +9,7 @@ import {
   useCreateUserWithEmailAndPassword,
   useSignInWithEmailAndPassword
 } from 'react-firebase-hooks/auth';
+import Login from './Login';
 
 import './styles.css';
 import {filterType, modeType} from './Constants';
@@ -41,6 +42,7 @@ function App() {
 
   const auth = firebase.auth();
   const googleProvider = new firebase.auth.GoogleAuthProvider();
+  const [user, userLoading, userError] = useAuthState(auth);
 
   useEffect(() => {
     let data = [];
@@ -67,7 +69,7 @@ function App() {
     auth.currentUser.sendEmailVerification();
   }
 
-  function SignIn() {
+  function SignIn(email, password) {
     const [
         signInWithEmailAndPassword,
         userCredential, loading, error
@@ -82,12 +84,10 @@ function App() {
     }
     return <div>
         {error && <p>"Error logging in: " {error.message}</p>}
-        <button onClick={() =>
-            signInWithEmailAndPassword(FAKE_EMAIL, FAKE_PASSWORD)}>Login with test user Email/PW
-        </button>
-        <button onClick={() =>
+        {signInWithEmailAndPassword(email, password)}
+        {/* <button onClick={() =>
             auth.signInWithPopup(googleProvider)}>Login with Google
-        </button>
+        </button> */}
     </div>
   }
 
@@ -190,9 +190,9 @@ function App() {
     )
   }
 
-  return (
+  function LoggedIn() {
     <div>
-    {query.loading && <h1>Loading</h1>}
+    {query.loading && <h1>Loading...</h1>}
     {todoListData && <>
       <div className="buttons">
         <div className="mainDropdownContainer">
@@ -253,8 +253,26 @@ function App() {
         lastId={lastId}
       />
     </>
-          }
+    }
     </div>
+  }
+
+  function LoggedOut() {
+    return <Login />
+  }
+
+  function UserStateController() {
+    if (userLoading) {
+      return <h1>Loading...</h1>
+    } else if (user) {
+      return <LoggedIn />;
+    } else {
+      return <LoggedOut />;
+    }
+  }
+
+  return (
+    <UserStateController />
   );
 }
 
