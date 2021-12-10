@@ -17,6 +17,8 @@ body {
 }
 
 .login-title {
+    align-items: center;
+    text-align: center;
     justify-content: center;
     display: flex;
     flex-direction: row;
@@ -114,6 +116,7 @@ body {
 
 .underline {
     text-decoration: underline;
+    margin-top: 0px;
 }
 
 .hide {
@@ -177,11 +180,19 @@ body {
     font-size:1.1em;
 }
 
+.userInfo {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
 .buttons {
     justify-content: space-between;
     text-align: right;
     display: flex;
     border-radius: 10px;   
+    margin-bottom: 20px;
 }
 
 @media screen and (max-width: 300px) {
@@ -197,6 +208,11 @@ body {
     .controlButtonContainer {
         padding-right: 10px;
     }
+}
+
+.permanentButtons {
+    display: flex;
+    flex-direction: column;
 }
 
 .plusButton {
@@ -274,6 +290,16 @@ body {
     margin-right: 5px;
 }
 
+.shareList {
+    background-color: #e5989b;
+    width: 80px;
+    height: 30px;
+    text-align:center;
+    line-height:1.1em;
+    font-size: small;
+    border-radius: 5px;
+}
+
 .container {
     display: flex;
 }
@@ -303,7 +329,15 @@ body {
     border:0;
     margin:10px 0;
     vertical-align: middle;
-    margin: 15px 15px 5px 15px;
+    background-color: #e5989b;
+    height: 12px;
+}
+
+.listPermsInput {
+    margin: 0px 10px 0px 0px !important;
+    padding:10px;
+    border:0;
+    vertical-align: middle;
     background-color: #e5989b;
     height: 12px;
 }

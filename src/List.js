@@ -8,7 +8,12 @@ export default function List(props) {
     const [todo, setTodo] = useState({});
     const [checked, setChecked] = useState({});
     const [priorityLevel, setPriorityLevel] = useState({});
-    
+    const [listPerms, setListPerms] = useState("");
+
+    function handleListPerms(e) {
+        setListPerms(e.target.value);
+    }
+
     function handleChange(index) {
         return (e) => {
             let isChecked = e.target.checked;
@@ -76,14 +81,33 @@ export default function List(props) {
             ))}
 
             <div className="footer">
-                {filteredData.filter(i => i.completed).length > 0 && 
-                    <div>
-                    {props.onShowAll}
-                    <button aria-label="Delete completed items" className="button deleteCompleted" onClick={deleteAllCompleted}>Delete Completed</button> 
+                <div style={{display: 'flex', flexDirection: 'column'}}>
+                    <div style={{display: 'flex', flexDirection: 'row'}}>
+                        {filteredData.filter(i => i.completed).length > 0 &&
+                            <div>
+                            {props.onShowAll}
+                            <button aria-label="Delete completed items" className="button deleteCompleted" onClick={deleteAllCompleted}>Delete Completed</button> 
+                            </div>
+                        }
+                        <button aria-label="Delete entire list" className="button deleteCompleted" onClick={deleteList}>Delete List</button> 
                     </div>
-                }
-                <div>
-                    <button aria-label="Delete entire list" className="button deleteCompleted" onClick={deleteList}>Delete List</button> 
+
+                    <div style={{display: 'flex', flexDirection: 'column'}}>
+                        <h4>Share this list by typing in a person's email (one at a time): </h4>
+                        <div style={{display: 'flex', flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center'}}>
+                            <input type='text' value={listPerms} onChange={handleListPerms} className="listPermsInput"/>
+                            <button 
+                                aria-label="Share list" 
+                                className="button shareList" 
+                                onClick={() => {
+                                        props.editShareWith(listPerms)
+                                        // clear field for next entry
+                                        setListPerms("");
+                                    }}>
+                                Share List
+                            </button> 
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

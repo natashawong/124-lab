@@ -14,3 +14,8 @@ export const priorityType = {
     med: 2,
     low: 1,
 }
+
+export const userState = {
+    login: "LOGIN",
+    signup: "SIGNUP",
+}
