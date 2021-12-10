@@ -29,18 +29,22 @@ export default function Login(props) {
 
     return (
         <div>
-            <div className = "title">
+            <div className = "login-title">
                 <h1>Log In</h1>
                 </div>
-            
-            <h3>Email Address</h3>
-            <input type='text' name={'username'} onChange={handleEmail} className="usernameInput"/>
-            <h3>Password</h3>
-            <input type='text' name={'password'} onChange={handlePassword} className="passwordInput"/>
 
-            <button aria-label="Click to login" className="login-button" onClick={() => handleLogIn(email, password)}>Log In</button>
-            {loginError !== "" && <p>{loginError}</p> }
-            <button aria-label="Click to Sign up" className="signup-button" onClick={props.signup}>SignUp</button>
+            <div className = "login-details">
+                <h3>Email Address</h3>
+                <input type='text' name={'username'} onChange={handleEmail} className="usernameInput"/>
+                <h3>Password</h3>
+                <input type='text' name={'password'} onChange={handlePassword} className="passwordInput"/>
+            </div>
+
+            <div className = "login-buttons">
+                <button aria-label="Click to login" className="login-button" onClick={() => handleLogIn(email, password)}>Log In</button>
+                <button aria-label="Click to Sign up" className="signup-button" onClick={props.signup}>Sign Up</button>
+            </div>
+                {loginError !== "" && <p>{loginError}</p> }
         </div>
     )
 }
