@@ -56,8 +56,6 @@ export default function LoggedIn() {
     }
   }, [currList, user.email, value]);
 
-  console.log(sharedWithList);
-
   function plusClicked() {
     // Adds an empty Todo
     const newId = generateUniqueID();
@@ -71,7 +69,7 @@ export default function LoggedIn() {
     // Creates a new list called "List<some combination of unique ID numbers>" with a "First Todo"
     const newId = generateUniqueID();
     let currDate = firebase.firestore.Timestamp.now();
-    collection.doc(newId).set({ id: newId, todo: "First Todo", completed: false, priority: 2, creationdate: currDate, list: "List" + newId.slice(20, 25), sharedWith: []});
+    collection.doc(newId).set({ id: newId, todo: "First Todo", completed: false, priority: 2, creationdate: currDate, list: "List" + newId.slice(20, 25), sharedWith: [user.email]});
     setLastId(newId);
     setMode(modeType.add);
   }
