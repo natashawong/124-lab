@@ -25,7 +25,7 @@ We had two users test our third iteration of our app: one who had tested the sec
 
 ### User testing 1
 
-![usertesting](images/usertest_3.png)
+![usertesting](images/usertest_4.png)
 
 As we can see from the texts above, the changes were well recieved. Having them test together and interact with each other also highlighted parts of the app that really stood out.
 
