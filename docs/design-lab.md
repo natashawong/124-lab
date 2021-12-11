@@ -17,8 +17,7 @@ Our list of rules for firebase are shown below:
 
 ![rules](images/rules.png)
 
-These include how users are able to access their to-do list, who can access their to-do lists. These rules dictate the read and write accewss of users.
-
+The rules are lax because we were unable to quite figure out how to work with the rules, and moved the restriction logic into the frontend instead. Filtering the data a user can see after pulling all the collection data.
 ### Alternate Designs
 
 We had very little design alternatives since from the beginning, we were certain about how we wanted to make our design and was like according to users. However, some design options we looked into was creating a modal for logging in:
